@@ -773,3 +773,109 @@
     transition: none;
   }
 }
+
+
+
+/* ==========================================
+   BRATZBERRY™ — HOME SCREEN REPAIR
+   Preserve Sasha wallpaper & custom icons
+   ========================================== */
+
+/* Keep the home screen from squeezing the app grid */
+.home-art {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  height: auto;
+  gap: 8px;
+  overflow: visible;
+}
+
+/* Stop the flexible spacer from stealing icon space */
+.home-art .home-spacer {
+  flex: 0 0 auto;
+  min-height: 20px;
+  height: 20px;
+}
+
+/* Give the icon grid room to display all three rows */
+.home-art .grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px 8px;
+  width: 100%;
+  margin-top: 12px;
+  padding: 12px 0 22px;
+  overflow: visible;
+  flex-shrink: 0;
+}
+
+/* Keep each app icon and label together */
+.home-art .app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 7px;
+  min-width: 0;
+  width: 100%;
+  height: auto;
+  min-height: 96px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+  overflow: visible;
+}
+
+/* Display the complete artwork without cropping */
+.home-art .appicon {
+  display: block;
+  width: 70px;
+  height: 70px;
+  max-width: 100%;
+  flex: 0 0 70px;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Keep the labels centered underneath */
+.home-art .app span {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  color: #ffe4d3;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: center;
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
+/* Ensure the scrollable phone content isn't clipped */
+#view {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Small screens */
+@media (max-width: 380px) {
+  .home-art .grid {
+    gap: 18px 6px;
+  }
+
+  .home-art .appicon {
+    width: 62px;
+    height: 62px;
+    flex-basis: 62px;
+  }
+
+  .home-art .app span {
+    font-size: 9px;
+  }
+}
