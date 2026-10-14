@@ -327,17 +327,25 @@ function go(destination) {
     `);
   }
 
-  else if (destination === "notes") {
+  
+else if (destination === "notes") {
+  if (
+    typeof loveNotesApp !== "undefined" &&
+    typeof loveNotesApp.menu === "function"
+  ) {
+    loveNotesApp.menu();
+  } else {
     render(`
       <button class="back" data-go="home">‹ Home</button>
-      <h2>Love Notes 📝</h2>
-
+      <h2>Love Notes 💗</h2>
       <div class="panel">
-        Tiny affirmations, inside jokes, and sweet
-        reminders will live here.
+        Love Notes couldn't load.
+        Check that love-notes.js is connected in index.html.
       </div>
     `);
   }
+}
+
 
   // ========================================
   // BESTIE SOS — NEW INTERACTIVE APP
