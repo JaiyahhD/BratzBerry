@@ -380,18 +380,25 @@ else if (destination === "notes") {
     }
   }
 
-  else if (destination === "about") {
-    render(`
-      <button class="back" data-go="home">‹ Home</button>
-      <h2>Sasha × Yasmin 💋</h2>
+  
+    else if (destination === "about") {
+    if (
+        typeof sashaYasminApp !== "undefined" &&
+        typeof sashaYasminApp.menu === "function"
+    ) {
+        sashaYasminApp.menu();
+    } else {
+        render(`
+        <button class="back" data-go="home">‹ Home</button>
+        <h2>Sasha × Yasmin 👑</h2>
+        <div class="panel">
+            The Duo File couldn't load.
+            Check that sasha-yasmin.js is linked in index.html.
+        </div>
+        `);
+    }
+    }
 
-      <div class="panel">
-        Two Bratz, one unbreakable sisterhood.
-        This phone was made by Yasmin,
-        just for her Bunny Boo.
-      </div>
-    `);
-  }
 
   else if (destination === "files") {
     render(`
