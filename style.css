@@ -3534,3 +3534,135 @@
   }
 }
 
+
+/* THE STICKER MUSEUM™ */
+
+.rom-sticker-count {
+  margin: 19px 0;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .5px;
+  color: var(--bb-accent, #eab9ca);
+}
+
+.rom-sticker-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.rom-sticker-card {
+  min-width: 0;
+  padding: 12px 9px;
+  border: 1px solid var(--bb-border, #b88c9c);
+  border-radius: 14px;
+  background: var(--bb-panel, #573947);
+  color: var(--bb-text, #ffe4ed);
+  text-align: center;
+  transition: transform .2s ease;
+}
+
+.rom-sticker-card:active {
+  transform: scale(.96);
+}
+
+.rom-sticker-art {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 130px;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  background: var(--bb-panel-soft, #714c5d);
+}
+
+.rom-sticker-art img {
+  max-width: 100%;
+  max-height: 115px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 4px rgba(0,0,0,.15));
+}
+
+.rom-sticker-card strong {
+  display: block;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.rom-sticker-card small {
+  display: block;
+  margin-top: 5px;
+  font-size: 9px;
+  color: var(--bb-muted, #e5bcca);
+}
+
+.rom-sticker-number {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 5px 8px;
+  border-radius: 20px;
+  background: var(--bb-button, #eab9ca);
+  color: var(--bb-button-text, #533040);
+  font-size: 8px;
+  font-weight: 900;
+}
+
+.rom-sticker-detail {
+  padding: 22px 13px;
+  border: 2px solid var(--bb-border, #b88c9c);
+  border-radius: 16px;
+  background: var(--bb-panel, #573947);
+  text-align: center;
+}
+
+.rom-sticker-detail > span {
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: var(--bb-accent, #eab9ca);
+}
+
+.rom-sticker-detail-art {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 245px;
+  padding: 15px;
+  margin: 18px 0;
+  border-radius: 12px;
+  background: var(--bb-panel-soft, #714c5d);
+}
+
+.rom-sticker-detail-art img {
+  display: block;
+  max-width: 100%;
+  max-height: 270px;
+  object-fit: contain;
+  filter: drop-shadow(0 7px 8px rgba(0,0,0,.2));
+}
+
+.rom-sticker-detail h3 {
+  font-family: Georgia, serif;
+  font-size: 24px;
+  margin: 12px 0;
+}
+
+.rom-sticker-detail p {
+  font-size: 12px;
+  color: var(--bb-muted, #e5bcca);
+}
+
+.rom-sticker-stamp {
+  display: inline-block;
+  margin-top: 19px;
+  padding: 9px 12px;
+  border: 2px dashed var(--bb-accent, #eab9ca);
+  border-radius: 8px;
+  color: var(--bb-accent, #eab9ca);
+  font-size: 10px;
+  font-weight: 900;
+  transform: rotate(-3deg);
+}
+

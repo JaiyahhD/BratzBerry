@@ -1,13 +1,32 @@
 
 /* ==========================================
-   BRATZBERRY™
-   MEMORIES — THE RECEIPTS OF US
+   BRATZBERRY™ — THE RECEIPTS OF US
    Sasha × Yasmin Edition
+   11 Memories + 15 Real Stickers
    ========================================== */
 
 const bunnyMemories = (() => {
   const ROOT = "assets/memories/";
+  const STICKER_ROOT = "assets/stickers/";
   const KEY = "bratzberry-memories-favorites-v1";
+
+  const stickers = [
+    { file: "ThatsABigWordTransparent.png", name: "That's a BIG Word", mood: "EXCUSE ME?" },
+    { file: "IMeaaannn.png", name: "I Meaaannn...", mood: "JUST SAYING" },
+    { file: "LulNosey.png", name: "Lul Nosey", mood: "MINDING EVERYBODY'S BUSINESS" },
+    { file: "MMCHT.png", name: "MMCHT", mood: "THE ATTITUDE" },
+    { file: "ZendayaSmile2.png", name: "The Little Smile", mood: "SAY LESS" },
+    { file: "ClockItWithNails.png", name: "Clock It!", mood: "AND THAT'S THAT" },
+    { file: "Appalled.png", name: "APPALLED.", mood: "GIRL WHAT?!" },
+    { file: "Mmm.png", name: "Mmmmm...", mood: "INTERESTING" },
+    { file: "YouSaidWhatNow.png", name: "You Said WHAT?", mood: "RUN THAT BACK" },
+    { file: "UhhComeAgain.png", name: "Come Again?", mood: "BE SO FR" },
+    { file: "IMeanYaKnow.png", name: "I Mean, Ya Know...", mood: "YOU GET IT" },
+    { file: "MakeItMakeSense.png", name: "Make It Make Sense", mood: "THE INVESTIGATION" },
+    { file: "JamalJawDrop.png", name: "JAW. DROPPED.", mood: "ABSOLUTELY NOT" },
+    { file: "HappyWoody.png", name: "Happy Woody", mood: "HEHEHE" },
+    { file: "IKYL.png", name: "IKYL", mood: "GIRLLLLL?!" }
+  ];
 
   const memories = [
     {
@@ -19,8 +38,7 @@ const bunnyMemories = (() => {
       title: "MA'AM, WHY ARE YOU AWAKE?!",
       tag: "THE SLEEP POLICE",
       quote: "WHY ARE YOU AWAKE?!!!",
-      caption:
-        "GIRLLLL. Why am I asking why you're awake when I clearly need to be asleep too? 😭 Neither one of us has any business policing the other's bedtime, but here we are.",
+      caption: "GIRLLLL. Why am I asking why you're awake when I clearly need to be asleep too? 😭 Neither one of us has any business policing the other's bedtime, but here we are.",
       note: "Two sleep schedules. Zero supervision."
     },
     {
@@ -32,8 +50,7 @@ const bunnyMemories = (() => {
       title: "WOULDN'T YOU LIKE TO KNOW?",
       tag: "THE STICKER LANGUAGE",
       quote: "I'M TRYNA SEE IF IT SIT RIGHT WITH MY SPIRIT",
-      caption:
-        "Not a single normal response in sight. 😭 We could have a whole conversation using nothing but GIFs, stickers, and questionable facial expressions.",
+      caption: "Not a single normal response in sight. 😭 We could have a whole conversation using nothing but GIFs, stickers, and questionable facial expressions.",
       note: "Fluent in reaction images."
     },
     {
@@ -45,8 +62,7 @@ const bunnyMemories = (() => {
       title: "DID YOU EAT, ANGEL BRENAAAE?",
       tag: "THE FOOD POLICE",
       quote: "Soooo Angel Brenae, it's afternoon time, did you eat?",
-      caption:
-        "I really be checking on your meals like I have some kind of official certification. 😭 But somebody gotta make sure my girl is eating!",
+      caption: "I really be checking on your meals like I have some kind of official certification. 😭 But somebody gotta make sure my girl is eating!",
       note: "Food Police Department, Case 001."
     },
     {
@@ -58,8 +74,7 @@ const bunnyMemories = (() => {
       title: "THE INTERROGATION CONTINUES",
       tag: "THE FOOD POLICE",
       quote: "Did YOU? AND was it anytime AFTER 12PM",
-      caption:
-        "AND THEN YOU TURNED THE WHOLE INVESTIGATION ON ME. 😭 See, this is why neither one of us can get away with skipping meals. The accountability is mutual, unfortunately.",
+      caption: "AND THEN YOU TURNED THE WHOLE INVESTIGATION ON ME. 😭 See, this is why neither one of us can get away with skipping meals. The accountability is mutual, unfortunately.",
       note: "Nobody is above the law."
     },
     {
@@ -71,8 +86,7 @@ const bunnyMemories = (() => {
       title: "GO EAT RIGHT NOW.",
       tag: "THE FOOD POLICE",
       quote: "HELP? MAAM DID YOU GET DINNER THO",
-      caption:
-        "The fact that I sent a whole GO EAT RIGHT NOW GIF, and you STILL came back asking about my dinner. 😭 We're really two grown women parenting each other.",
+      caption: "The fact that I sent a whole GO EAT RIGHT NOW GIF, and you STILL came back asking about my dinner. 😭 We're really two grown women parenting each other.",
       note: "Both officers under investigation."
     },
     {
@@ -84,8 +98,7 @@ const bunnyMemories = (() => {
       title: "THE CHOCOLATE FROG DEPARTMENT",
       tag: "BEHIND THE TBB SCENES",
       quote: "OH YES THIS IS NOICEEE",
-      caption:
-        "One minute we're talking ideas, next thing you know we're figuring out cards, prices, submissions, and a whole system. 😂 This is what happens when our brains get together.",
+      caption: "One minute we're talking ideas, next thing you know we're figuring out cards, prices, submissions, and a whole system. 😂 This is what happens when our brains get together.",
       note: "Just two girls and another project."
     },
     {
@@ -97,8 +110,7 @@ const bunnyMemories = (() => {
       title: "AYE KEEP MOVING DAWG!",
       tag: "BEHIND THE TBB SCENES",
       quote: "AYE KEEP MOVING DAWG",
-      caption:
-        "GIRL, NOT THE FILE TIMES MOVING WHILE WE'RE TRYING TO FIGURE THINGS OUT. 😭 The projects be PROJECTING, but somehow we always find a way to laugh through the chaos.",
+      caption: "GIRL, NOT THE FILE TIMES MOVING WHILE WE'RE TRYING TO FIGURE THINGS OUT. 😭 The projects be PROJECTING, but somehow we always find a way to laugh through the chaos.",
       note: "Technical difficulties, starring us."
     },
     {
@@ -110,8 +122,7 @@ const bunnyMemories = (() => {
       title: "CAN I ASK YOU ONE MORE THING?",
       tag: "BEHIND THE TBB SCENES",
       quote: "COULD NEVA BE SICK",
-      caption:
-        "Me coming to you with another TBB question like GIRL, I promise I'm almost done. 😂 But you always make room for the conversation. That's something I appreciate more than you know.",
+      caption: "Me coming to you with another TBB question like GIRL, I promise I'm almost done. 😂 But you always make room for the conversation. That's something I appreciate more than you know.",
       note: "Founder × The Girl With Another Question."
     },
     {
@@ -123,8 +134,7 @@ const bunnyMemories = (() => {
       title: "SAME TASTE, SAME NONSENSE",
       tag: "THE STICKER LANGUAGE",
       quote: "Hold on now I'm learning smth new",
-      caption:
-        "We can start off talking about fashion and somehow end up in a GIF exchange. 😭 I swear, we find a way to make absolutely anything funny.",
+      caption: "We can start off talking about fashion and somehow end up in a GIF exchange. 😭 I swear, we find a way to make absolutely anything funny.",
       note: "A normal conversation? Never heard of her."
     },
     {
@@ -136,8 +146,7 @@ const bunnyMemories = (() => {
       title: "WAIT!! WHAT'S FOR DINNER?",
       tag: "THE FOOD POLICE",
       quote: "WHATS FOR DINNER",
-      caption:
-        "NOT SPONGEBOB ENTERING THE FOOD INVESTIGATION. 😭 At this point, asking if you've eaten is basically part of my daily vocabulary.",
+      caption: "NOT SPONGEBOB ENTERING THE FOOD INVESTIGATION. 😭 At this point, asking if you've eaten is basically part of my daily vocabulary.",
       note: "The kitchen is under surveillance."
     },
     {
@@ -149,8 +158,7 @@ const bunnyMemories = (() => {
       title: "ILY FOR LIFEEEEE.",
       tag: "THE SOFT SPOT",
       quote: "ILY FOR LIFEEEEE",
-      caption:
-        "And THIS right here? This is my favorite kind of receipt. We joke, we laugh, we get on each other's nerves about eating and sleeping, and we build things together. But underneath all that is a friendship I genuinely cherish. You really are one of my biggest supporters, and I hope you never forget that I'm always rooting for you too. ILY MOREEEE, Bunny Boo. For life. 🤎",
+      caption: "And THIS right here? This is my favorite kind of receipt. We joke, we laugh, we get on each other's nerves about eating and sleeping, and we build things together. But underneath all that is a friendship I genuinely cherish. You really are one of my biggest supporters, and I hope you never forget that I'm always rooting for you too. ILY MOREEEE, Bunny Boo. For life. 🤎",
       note: "Some receipts are worth keeping forever."
     }
   ];
@@ -165,6 +173,7 @@ const bunnyMemories = (() => {
   ];
 
   let favorites = [];
+
   try {
     const stored = JSON.parse(localStorage.getItem(KEY) || "[]");
     favorites = Array.isArray(stored)
@@ -194,10 +203,17 @@ const bunnyMemories = (() => {
   }
 
   function top(title, subtitle, back = "home") {
+    const backLabels = {
+      home: "Scrapbook",
+      gallery: "Gallery",
+      museum: "Sticker Museum"
+    };
+
     return `
       <button class="rom-back" data-rom="${back}">
-        ‹ ${back === "home" ? "Scrapbook" : "Gallery"}
+        ‹ ${backLabels[back] || "Back"}
       </button>
+
       <header class="rom-heading">
         <span>THE SASHA × YASMIN ARCHIVES</span>
         <h2>${title}</h2>
@@ -206,10 +222,9 @@ const bunnyMemories = (() => {
     `;
   }
 
-  function imageTag(memory, className = "") {
+  function imageTag(memory) {
     return `
       <img
-        class="${className}"
         src="${ROOT}${memory.image}"
         alt="Discord conversation from ${memory.date}: ${memory.title}"
         loading="lazy"
@@ -232,11 +247,14 @@ const bunnyMemories = (() => {
       <div class="rom-hero">
         <span>BRATZBERRY™ PRESENTS</span>
         <div class="rom-hero-icons">💌 ✨ 📸</div>
+
         <h1>THE RECEIPTS<br>OF US ♡</h1>
+
         <p>
           A friendship told through screenshots,
           stickers, side-eyes & way too many messages.
         </p>
+
         <div class="rom-hero-footer">
           SASHA × YASMIN · VOL. 001
         </div>
@@ -244,18 +262,21 @@ const bunnyMemories = (() => {
 
       <div class="rom-intro">
         <span>DEAR BUNNY BOO,</span>
+
         <p>
           GIRLLLL, we talk WAY too much for me to ever
           fit everything in one little scrapbook. 😭
           But these? These are some of the receipts
           that make us, US.
         </p>
+
         <p>
           From making sure the other one ate,
           to our endless stickers, to the things
           we've built together... I wouldn't trade
           our little corner of the internet for anything.
         </p>
+
         <strong>— YOUR YASMIN 💋</strong>
       </div>
 
@@ -273,7 +294,7 @@ const bunnyMemories = (() => {
         <button data-rom="museum">
           <span>😭</span>
           <strong>Sticker Museum</strong>
-          <small>Our second language</small>
+          <small>Our actual sticker collection</small>
         </button>
 
         <button data-rom="favorites">
@@ -311,15 +332,17 @@ const bunnyMemories = (() => {
       ${top("The Receipts 📸", "Actual conversations. Actual foolishness.", "gallery")}
 
       <div class="rom-progress">
-        <span>RECEIPT ${String(index + 1).padStart(2, "0")} / 11</span>
+        <span>RECEIPT ${String(index + 1).padStart(2, "0")} / ${memories.length}</span>
         <span>${memory.date}</span>
       </div>
 
       <div class="rom-polaroid">
         <div class="rom-tape"></div>
+
         <div class="rom-photo">
           ${imageTag(memory)}
         </div>
+
         <div class="rom-polaroid-label">
           ${memory.emoji} ${memory.tag}
         </div>
@@ -348,7 +371,9 @@ const bunnyMemories = (() => {
         <button data-rom-prev ${index === 0 ? "disabled" : ""}>
           ← Previous
         </button>
+
         <span>${index + 1} / ${memories.length}</span>
+
         <button data-rom-next ${index === memories.length - 1 ? "disabled" : ""}>
           Next →
         </button>
@@ -357,7 +382,9 @@ const bunnyMemories = (() => {
       ${index === memories.length - 1 ? `
         <div class="rom-last-hint">
           💗 You've reached the sweetest receipt.
-          <button data-rom="ending">Read the final page →</button>
+          <button data-rom="ending">
+            Read the final page →
+          </button>
         </div>
       ` : ""}
 
@@ -371,7 +398,7 @@ const bunnyMemories = (() => {
     screen = onlyFavorites ? "favorites" : "gallery";
 
     const filtered = memories.filter(memory =>
-      (onlyFavorites ? favorites.includes(memory.id) : true) &&
+      (!onlyFavorites || favorites.includes(memory.id)) &&
       (filter === "all" || memory.category === filter)
     );
 
@@ -395,73 +422,156 @@ const bunnyMemories = (() => {
       </div>
 
       <div class="rom-gallery">
-        ${filtered.length ? filtered.map(memory => `
-          <button class="rom-gallery-card" data-rom-open="${memory.id}">
-            <div class="rom-gallery-image">
-              ${imageTag(memory)}
+        ${filtered.length
+          ? filtered.map(memory => `
+            <button class="rom-gallery-card" data-rom-open="${memory.id}">
+              <div class="rom-gallery-image">
+                ${imageTag(memory)}
+              </div>
+
+              <span>${memory.emoji} ${memory.tag}</span>
+              <strong>${memory.title}</strong>
+              <small>${memory.date}</small>
+
+              ${favorites.includes(memory.id)
+                ? `<b class="rom-gallery-heart">♥</b>`
+                : ""}
+            </button>
+          `).join("")
+          : `
+            <div class="rom-empty">
+              <div>💌</div>
+              <h3>No receipts here yet!</h3>
+              <p>
+                ${onlyFavorites
+                  ? "Open a memory and tap Save This Receipt to add it here."
+                  : "Try another scrapbook category."}
+              </p>
             </div>
-            <span>${memory.emoji} ${memory.tag}</span>
-            <strong>${memory.title}</strong>
-            <small>${memory.date}</small>
-            ${favorites.includes(memory.id)
-              ? `<b class="rom-gallery-heart">♥</b>`
-              : ""}
-          </button>
-        `).join("") : `
-          <div class="rom-empty">
-            <div>💌</div>
-            <h3>No receipts here yet!</h3>
-            <p>
-              ${onlyFavorites
-                ? "Open a memory and tap Save This Receipt to add it here."
-                : "Try another scrapbook category."}
-            </p>
-          </div>
-        `}
+          `}
       </div>
     `);
   }
 
+  /* ==========================================
+     THE STICKER MUSEUM
+     Only the 15 uploaded sticker images
+     ========================================== */
+
   function museum() {
     screen = "museum";
-
-    const stickerMemories = memories.filter(memory =>
-      [1, 2, 4, 5, 7, 9, 10].includes(memory.id)
-    );
 
     renderPage(`
       ${top(
         "The Sticker Museum 😭",
-        "Because typing a regular response is apparently illegal."
+        "The official language of Sasha × Yasmin."
       )}
 
       <div class="rom-museum-intro">
-        <span>THE OFFICIAL EXHIBIT</span>
-        <h3>WE SPEAK FLUENT GIF.</h3>
+        <span>WELCOME TO THE EXHIBIT</span>
+        <h3>WE SPEAK FLUENT STICKER.</h3>
+
         <p>
-          Angel, the way we communicate through stickers
-          and reaction images needs to be studied. 😭
-          Here's a little collection of our finest nonsense.
+          GIRLLLL. The way we communicate through
+          reaction images needs to be studied. 😭
+          These are some of our most-used stickers,
+          because apparently words alone are never enough.
         </p>
       </div>
 
-      <div class="rom-museum-grid">
-        ${stickerMemories.map(memory => `
-          <button data-rom-open="${memory.id}" class="rom-museum-card">
-            <div class="rom-museum-photo">
-              ${imageTag(memory)}
+      <div class="rom-sticker-count">
+        💋 ${stickers.length} ICONIC REACTIONS · UNLIMITED ATTITUDE
+      </div>
+
+      <div class="rom-sticker-grid">
+        ${stickers.map((sticker, index) => `
+          <button
+            class="rom-sticker-card"
+            data-rom-sticker="${index}"
+            aria-label="View ${sticker.name}"
+          >
+            <div class="rom-sticker-art">
+              <img
+                src="${STICKER_ROOT}${sticker.file}"
+                alt="${sticker.name}"
+                loading="lazy"
+              />
             </div>
-            <strong>${memory.emoji} ${memory.title}</strong>
-            <small>Tap to see the whole conversation →</small>
+
+            <strong>${sticker.name}</strong>
+            <small>${sticker.mood}</small>
+
+            <span class="rom-sticker-number">
+              EXHIBIT ${String(index + 1).padStart(2, "0")}
+            </span>
           </button>
         `).join("")}
       </div>
 
       <p class="rom-museum-outro">
-        MEMBERSHIP: LIFETIME · LANGUAGE: STICKERS & FOOLISHNESS 💋
+        NO EXPLANATION NECESSARY. JUST SEND THE STICKER. 💋
       </p>
     `);
   }
+
+  function stickerDetail(index) {
+    const sticker = stickers[index];
+    if (!sticker) return;
+
+    screen = "sticker";
+
+    renderPage(`
+      ${top(
+        `Exhibit ${String(index + 1).padStart(2, "0")} 💋`,
+        "A certified Sasha × Yasmin reaction.",
+        "museum"
+      )}
+
+      <div class="rom-sticker-detail">
+        <span>THE STICKER MUSEUM™</span>
+
+        <div class="rom-sticker-detail-art">
+          <img
+            src="${STICKER_ROOT}${sticker.file}"
+            alt="${sticker.name}"
+          />
+        </div>
+
+        <h3>${sticker.name}</h3>
+        <p>${sticker.mood}</p>
+
+        <div class="rom-sticker-stamp">
+          CERTIFIED BESTIE REACTION ♡
+        </div>
+      </div>
+
+      <div class="rom-nav">
+        <button
+          data-rom-sticker="${index - 1}"
+          ${index === 0 ? "disabled" : ""}
+        >
+          ← Previous
+        </button>
+
+        <span>${index + 1} / ${stickers.length}</span>
+
+        <button
+          data-rom-sticker="${index + 1}"
+          ${index === stickers.length - 1 ? "disabled" : ""}
+        >
+          Next →
+        </button>
+      </div>
+
+      <button class="rom-primary" data-rom="museum">
+        Back to the Sticker Museum 😭
+      </button>
+    `);
+  }
+
+  /* ==========================================
+     THE FINAL RECEIPT
+     ========================================== */
 
   function ending() {
     screen = "ending";
@@ -517,6 +627,7 @@ const bunnyMemories = (() => {
           </p>
 
           <h3>ILY MOREEEE. FOR LIFE. 🤎</h3>
+
           <div class="rom-ending-signature">
             YOUR YASMIN, ALWAYS 💋
           </div>
@@ -534,6 +645,10 @@ const bunnyMemories = (() => {
     `);
   }
 
+  /* ==========================================
+     NAVIGATION + INTERACTIONS
+     ========================================== */
+
   function openNext(direction) {
     const index = memories.findIndex(m => m.id === currentId);
     const next = index + direction;
@@ -549,6 +664,7 @@ const bunnyMemories = (() => {
     } else {
       favorites.push(id);
     }
+
     save();
     receipt(id);
   }
@@ -556,32 +672,48 @@ const bunnyMemories = (() => {
   function handleClick(event) {
     if (!isOpen()) return;
 
+    const stickerButton = event.target.closest("[data-rom-sticker]");
+
+    if (stickerButton) {
+      if (!stickerButton.disabled) {
+        stickerDetail(Number(stickerButton.dataset.romSticker));
+      }
+      return;
+    }
+
     const favoriteButton = event.target.closest("[data-rom-favorite]");
+
     if (favoriteButton) {
       toggleFavorite(Number(favoriteButton.dataset.romFavorite));
       return;
     }
 
     const openButton = event.target.closest("[data-rom-open]");
+
     if (openButton) {
       receipt(Number(openButton.dataset.romOpen));
       return;
     }
 
     const filterButton = event.target.closest("[data-rom-filter]");
+
     if (filterButton) {
       filter = filterButton.dataset.romFilter;
       gallery(screen === "favorites");
       return;
     }
 
-    if (event.target.closest("[data-rom-prev]")) {
-      openNext(-1);
+    const previousButton = event.target.closest("[data-rom-prev]");
+
+    if (previousButton) {
+      if (!previousButton.disabled) openNext(-1);
       return;
     }
 
-    if (event.target.closest("[data-rom-next]")) {
-      openNext(1);
+    const nextButton = event.target.closest("[data-rom-next]");
+
+    if (nextButton) {
+      if (!nextButton.disabled) openNext(1);
       return;
     }
 
@@ -590,26 +722,30 @@ const bunnyMemories = (() => {
 
     const action = button.dataset.rom;
 
-    if (action === "home") home();
-    else if (action === "read") receipt(1);
-    else if (action === "gallery") {
+    if (action === "home") {
+      home();
+    } else if (action === "read") {
+      receipt(1);
+    } else if (action === "gallery") {
       filter = "all";
       gallery();
-    }
-    else if (action === "favorites") {
+    } else if (action === "favorites") {
       filter = "all";
       gallery(true);
+    } else if (action === "museum") {
+      museum();
+    } else if (action === "ending") {
+      ending();
     }
-    else if (action === "museum") museum();
-    else if (action === "ending") ending();
   }
 
   view.addEventListener("click", handleClick);
 
-  // Swipe only within the scrapbook receipt pages.
+  // Swipe navigation for scrapbook receipts only.
   view.addEventListener("touchstart", event => {
     if (!isOpen() || screen !== "receipt") return;
     if (!event.target.closest(".rom-app")) return;
+
     touchStartX = event.changedTouches[0].screenX;
   }, { passive: true });
 
@@ -624,5 +760,7 @@ const bunnyMemories = (() => {
     }
   }, { passive: true });
 
-  return { menu: home };
+  return {
+    menu: home
+  };
 })();
