@@ -151,10 +151,19 @@ function cancelPlayback() {
 
 function go(destination) {
   cancelPlayback();
+
+  // Stop SOS timers when leaving Bestie SOS.
+  if (
+    page === "sos" &&
+    destination !== "sos" &&
+    typeof bestieSOS !== "undefined"
+  ) {
+    bestieSOS.cleanup();
+  }
+
   page = destination;
 
-  // Minimize the music controls when changing apps.
-  // IMPORTANT: The Spotify iframe is NOT removed.
+  // Minimize Spotify without removing its iframe.
   if (destination !== "music") {
     setDockExpanded(false);
   }
@@ -330,29 +339,37 @@ function go(destination) {
     `);
   }
 
+  // ========================================
+  // BESTIE SOS — NEW INTERACTIVE APP
+  // ========================================
+
   else if (destination === "sos") {
-    render(`
-      <button class="back" data-go="home">‹ Home</button>
-      <h2>Bestie SOS 🫶</h2>
+    if (
+      typeof bestieSOS !== "undefined" &&
+      typeof bestieSOS.menu === "function"
+    ) {
+      bestieSOS.menu();
+    } else {
+      render(`
+        <button class="back" data-go="home">‹ Home</button>
 
-      <div class="panel">
-        Bunny Boo, whatever today looks like,
-        you're not facing it alone.
-        Pick the reminder you need most.
-      </div>
+        <h2>Bestie SOS 💋</h2>
 
-      <button class="thread" data-thread="1">
-        🌷 I'm overwhelmed
-      </button>
+        <div class="panel">
+          <strong>Bestie SOS isn't connected yet.</strong>
 
-      <button class="thread" data-thread="2">
-        🫂 I need my soul sister
-      </button>
+          <p>
+            Make sure bestie-sos.js exists in your project
+            folder and is loaded after script.js
+            in index.html.
+          </p>
+        </div>
+      `);
 
-      <button class="thread" data-thread="3">
-        👑 I need confidence
-      </button>
-    `);
+      console.error(
+        "BRATZBERRY: bestie-sos.js is missing or did not load correctly."
+      );
+    }
   }
 
   else if (destination === "about") {
@@ -644,8 +661,7 @@ function loadPersistentPlaylist(playlist) {
     return false;
   }
 
-  // Don't reload a playlist that's already mounted.
-  // This is what lets the audio continue!
+  // Keep the existing Spotify iframe alive.
   if (currentPlaylistId === playlist.id) {
     musicDock.hidden = false;
     setDockExpanded(true);
@@ -657,8 +673,8 @@ function loadPersistentPlaylist(playlist) {
     encodeURIComponent(playlistId) +
     "?utm_source=generator";
 
-  // Replace the iframe ONLY when choosing
-  // a DIFFERENT playlist.
+  // Only replace the iframe when selecting
+  // a different playlist.
   dockPlayer.innerHTML = `
     <iframe
       src="${embedUrl}"
@@ -685,7 +701,6 @@ function loadPersistentPlaylist(playlist) {
   return true;
 }
 
-// Expand/minimize WITHOUT deleting the iframe.
 dockToggle.addEventListener("click", () => {
   setDockExpanded(!dockExpanded);
 });
@@ -770,7 +785,11 @@ function renderBooBeats(selectedId = null) {
                   class="boo-cover"
                   style="background:${escapeHTML(playlist.color || "#84525D")}"
                 >
-                  ♫
+                  <img
+                    src="${escapeHTML(playlist.cover || "")}"
+                    alt="${escapeHTML(playlist.name)} album cover"
+                    style="width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit;"
+                  >
                 </div>
 
                 <div class="boo-playlist-info">
@@ -847,7 +866,7 @@ function renderSelectedPlaylist(playlist) {
     "https://open.spotify.com/playlist/" +
     encodeURIComponent(playlistId);
 
-  // Mount the player outside #view.
+  // Spotify stays mounted outside #view.
   loadPersistentPlaylist(playlist);
 
   return `
