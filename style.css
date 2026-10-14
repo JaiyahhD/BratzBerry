@@ -2891,3 +2891,646 @@
     transition: none !important;
   }
 }
+
+
+/* ==========================================
+   THE RECEIPTS OF US™ — MEMORIES
+   ========================================== */
+
+.rom-app {
+  padding: 8px 4px 90px;
+  color: var(--bb-text, #ffe4ed);
+}
+
+.rom-app button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.rom-app button:focus-visible {
+  outline: 3px solid var(--bb-accent, #edb8cd);
+  outline-offset: 3px;
+}
+
+.rom-back {
+  padding: 9px 12px;
+  border: 1px solid var(--bb-border, #b88c9c);
+  border-radius: 20px;
+  background: var(--bb-panel, #533746);
+  color: var(--bb-text, #ffe4ed);
+  font-size: 11px;
+}
+
+.rom-heading {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.rom-heading > span,
+.rom-hero > span {
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: var(--bb-accent, #eab9ca);
+}
+
+.rom-heading h2 {
+  margin: 10px 0;
+  font-size: 24px;
+}
+
+.rom-heading p {
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--bb-muted, #e5bcca);
+}
+
+.rom-hero {
+  padding: 28px 15px 19px;
+  border: 5px solid #f3c9d5;
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 85% 12%, #e4b4c2 0 7%, transparent 8%),
+    linear-gradient(135deg, #f6e2dc, #e5c2cd);
+  color: #673b4c;
+  text-align: center;
+  box-shadow: 0 9px 20px rgba(0,0,0,.17);
+}
+
+.rom-hero > span {
+  color: #945a71;
+}
+
+.rom-hero-icons {
+  margin: 20px 0 8px;
+  font-size: 30px;
+}
+
+.rom-hero h1 {
+  font-family: Georgia, serif;
+  font-size: clamp(25px, 8vw, 37px);
+  line-height: 1.15;
+  margin: 10px 0 15px;
+}
+
+.rom-hero p {
+  font-size: 12px;
+  line-height: 1.8;
+  max-width: 250px;
+  margin: auto;
+}
+
+.rom-hero-footer {
+  margin-top: 27px;
+  padding-top: 13px;
+  border-top: 1px solid #cb9caa;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.rom-intro {
+  margin: 20px 0;
+  padding: 20px 16px;
+  background: var(--bb-panel, #573947);
+  border: 1px solid var(--bb-border, #b88c9c);
+  border-radius: 13px;
+}
+
+.rom-intro > span {
+  font-size: 10px;
+  font-weight: 900;
+  color: var(--bb-accent, #eab9ca);
+}
+
+.rom-intro p {
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.rom-intro strong {
+  display: block;
+  text-align: right;
+  font-size: 11px;
+  color: var(--bb-accent, #eab9ca);
+}
+
+.rom-primary {
+  width: 100%;
+  padding: 15px;
+  margin: 10px 0 17px;
+  border: none;
+  border-radius: 24px;
+  background: var(--bb-button, #eab9ca);
+  color: var(--bb-button-text, #533040);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.rom-home-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 10px;
+}
+
+.rom-home-grid button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 18px 8px;
+  border: 1px solid var(--bb-border, #b88c9c);
+  border-radius: 13px;
+  background: var(--bb-panel, #573947);
+  color: var(--bb-text, #ffe4ed);
+}
+
+.rom-home-grid button span {
+  font-size: 27px;
+}
+
+.rom-home-grid button strong {
+  font-size: 11px;
+  text-align: center;
+}
+
+.rom-home-grid button small {
+  font-size: 9px;
+  text-align: center;
+  color: var(--bb-muted, #e5bcca);
+}
+
+.rom-footer,
+.rom-swipe-hint {
+  margin: 24px 0;
+  text-align: center;
+  font-size: 9px;
+  letter-spacing: .4px;
+  color: var(--bb-muted, #e5bcca);
+}
+
+.rom-progress {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 15px 0;
+  font-size: 9px;
+  font-weight: 800;
+  color: var(--bb-accent, #eab9ca);
+}
+
+.rom-polaroid {
+  position: relative;
+  padding: 13px 13px 20px;
+  margin: 23px 4px;
+  background: #f7ebe5;
+  color: #684154;
+  border-radius: 4px;
+  transform: rotate(-1deg);
+  box-shadow: 0 9px 22px rgba(0,0,0,.24);
+}
+
+.rom-tape {
+  position: absolute;
+  z-index: 2;
+  top: -14px;
+  left: 50%;
+  width: 92px;
+  height: 27px;
+  transform: translateX(-50%) rotate(3deg);
+  background: rgba(226,166,188,.75);
+  clip-path: polygon(3% 0,100% 0,96% 100%,0 100%);
+}
+
+.rom-photo {
+  background: #e9d8df;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.rom-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.rom-polaroid-label {
+  padding-top: 15px;
+  font-size: 11px;
+  font-weight: 900;
+  text-align: center;
+  letter-spacing: .5px;
+}
+
+.rom-image-error {
+  padding: 30px 12px;
+  text-align: center;
+  color: #714459;
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.rom-image-error strong,
+.rom-image-error small {
+  display: block;
+}
+
+.rom-caption {
+  margin-top: 20px;
+  padding: 21px 16px;
+  background: #f0dfd9;
+  color: #643d4c;
+  border-radius: 10px;
+}
+
+.rom-caption > span {
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: #a2657e;
+}
+
+.rom-caption h3 {
+  font-family: Georgia,serif;
+  font-size: 22px;
+  line-height: 1.3;
+  margin: 12px 0;
+}
+
+.rom-caption blockquote {
+  margin: 16px 0;
+  padding: 10px 12px;
+  border-left: 3px solid #c17c98;
+  background: #f9eee9;
+  font-size: 12px;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.rom-caption p {
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.rom-signature {
+  margin-top: 17px;
+  text-align: right;
+  font-size: 11px;
+  font-weight: 900;
+  color: #a2657e;
+}
+
+.rom-mini-note {
+  margin: 15px 0;
+  padding: 12px;
+  background: var(--bb-panel-soft, #714c5d);
+  border-radius: 10px;
+  font-size: 11px;
+  text-align: center;
+}
+
+.rom-favorite {
+  display: block;
+  width: 100%;
+  padding: 13px;
+  border: 1px solid var(--bb-border, #b88c9c);
+  border-radius: 23px;
+  background: var(--bb-panel, #573947);
+  color: var(--bb-text, #ffe4ed);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.rom-is-favorite {
+  border-color: var(--bb-accent, #eab9ca);
+}
+
+.rom-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 7px;
+  margin: 20px 0 10px;
+}
+
+.rom-nav button {
+  padding: 10px;
+  border: 1px solid var(--bb-border, #b88c9c);
+  border-radius: 20px;
+  background: var(--bb-panel, #573947);
+  color: var(--bb-text, #ffe4ed);
+  font-size: 10px;
+}
+
+.rom-nav button:disabled {
+  opacity: .35;
+  cursor: default;
+}
+
+.rom-nav span {
+  font-size: 10px;
+}
+
+.rom-last-hint {
+  padding: 15px;
+  margin-top: 17px;
+  border-radius: 12px;
+  background: #eac9d3;
+  color: #6b3e50;
+  font-size: 12px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.rom-last-hint button {
+  display: block;
+  margin: 12px auto 0;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 20px;
+  background: #9d627b;
+  color: white;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.rom-filter-row {
+  display: flex;
+  gap: 7px;
+  overflow-x: auto;
+  padding: 5px 0 13px;
+  scrollbar-width: thin;
+}
+
+.rom-filter-row button {
+  flex: 0 0 auto;
+  padding: 9px 12px;
+  border: 1px solid var(--bb-border, #b88c9c);
+  border-radius: 20px;
+  background: var(--bb-panel, #573947);
+  color: var(--bb-text, #ffe4ed);
+  font-size: 10px;
+}
+
+.rom-filter-row button.rom-selected {
+  background: var(--bb-button, #eab9ca);
+  color: var(--bb-button-text, #533040);
+  font-weight: 900;
+}
+
+.rom-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 13px;
+}
+
+.rom-gallery-card {
+  position: relative;
+  min-width: 0;
+  padding: 8px 8px 14px;
+  background: #f5e8e3;
+  color: #653d4e;
+  border: none;
+  border-radius: 5px;
+  text-align: left;
+  box-shadow: 0 5px 13px rgba(0,0,0,.15);
+}
+
+.rom-gallery-card:nth-child(even) {
+  transform: rotate(1deg);
+}
+
+.rom-gallery-card:nth-child(odd) {
+  transform: rotate(-1deg);
+}
+
+.rom-gallery-image {
+  height: 155px;
+  overflow: hidden;
+  background: #e8d0d9;
+}
+
+.rom-gallery-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.rom-gallery-card > span {
+  display: block;
+  margin-top: 10px;
+  font-size: 8px;
+  font-weight: 900;
+  color: #a06179;
+}
+
+.rom-gallery-card strong {
+  display: block;
+  margin: 7px 0;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.rom-gallery-card small {
+  font-size: 9px;
+  color: #886375;
+}
+
+.rom-gallery-heart {
+  position: absolute;
+  right: 9px;
+  bottom: 8px;
+  color: #bd6485;
+}
+
+.rom-empty {
+  grid-column: 1 / -1;
+  padding: 28px 15px;
+  text-align: center;
+  background: var(--bb-panel, #573947);
+  border-radius: 12px;
+}
+
+.rom-empty > div {
+  font-size: 33px;
+}
+
+.rom-empty h3 {
+  font-size: 16px;
+}
+
+.rom-empty p {
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.rom-museum-intro {
+  padding: 20px 15px;
+  background: #eac9d3;
+  color: #643b4d;
+  border-radius: 13px;
+  text-align: center;
+}
+
+.rom-museum-intro span {
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.rom-museum-intro h3 {
+  font-family: Georgia,serif;
+  font-size: 23px;
+}
+
+.rom-museum-intro p {
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.rom-museum-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.rom-museum-card {
+  min-width: 0;
+  padding: 9px;
+  border: 1px solid var(--bb-border, #b88c9c);
+  border-radius: 12px;
+  background: var(--bb-panel, #573947);
+  color: var(--bb-text, #ffe4ed);
+  text-align: left;
+}
+
+.rom-museum-photo {
+  height: 135px;
+  overflow: hidden;
+  border-radius: 7px;
+  background: #eac9d3;
+}
+
+.rom-museum-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.rom-museum-card strong {
+  display: block;
+  margin-top: 10px;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.rom-museum-card small {
+  display: block;
+  margin-top: 7px;
+  font-size: 9px;
+  line-height: 1.5;
+  color: var(--bb-muted, #e5bcca);
+}
+
+.rom-museum-outro {
+  margin: 24px 0;
+  text-align: center;
+  font-size: 9px;
+  color: var(--bb-muted, #e5bcca);
+}
+
+.rom-ending {
+  padding: 22px 14px;
+  border-radius: 12px;
+  background: #f0ded9;
+  color: #633b4b;
+  text-align: center;
+}
+
+.rom-ending-stars {
+  font-size: 23px;
+  color: #bb7894;
+}
+
+.rom-ending > span {
+  display: block;
+  margin-top: 14px;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.rom-ending > h2 {
+  font-family: Georgia,serif;
+  font-size: 26px;
+  line-height: 1.3;
+}
+
+.rom-ending-photo {
+  padding: 9px 9px 18px;
+  background: white;
+  transform: rotate(-1deg);
+  box-shadow: 0 5px 13px rgba(0,0,0,.12);
+}
+
+.rom-ending-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.rom-ending-letter {
+  padding: 15px 4px;
+  text-align: left;
+}
+
+.rom-ending-letter p {
+  margin: 17px 0;
+  font-size: 12px;
+  line-height: 2;
+}
+
+.rom-ending-letter h3 {
+  margin: 25px 0 13px;
+  font-family: Georgia,serif;
+  font-size: 20px;
+  color: #a55e7b;
+  text-align: center;
+}
+
+.rom-ending-signature {
+  font-size: 11px;
+  font-weight: 900;
+  text-align: right;
+}
+
+.rom-ending-bottom {
+  margin-top: 17px;
+  padding-top: 18px;
+  border-top: 1px solid #d6acba;
+  font-size: 9px;
+  letter-spacing: .8px;
+}
+
+.rom-ending-bottom strong {
+  display: block;
+  margin-top: 8px;
+  font-family: Georgia,serif;
+  font-size: 18px;
+  letter-spacing: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rom-app *,
+  .rom-app *::before,
+  .rom-app *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+

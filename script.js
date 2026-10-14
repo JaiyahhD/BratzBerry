@@ -315,17 +315,11 @@ function go(destination) {
     `);
   }
 
-  else if (destination === "memories") {
-    render(`
-      <button class="back" data-go="home">‹ Home</button>
-      <h2>Our Memories 📸</h2>
+  
+    else if (destination === "memories") {
+    bunnyMemories.menu();
+    }
 
-      <div class="panel">
-        A home for your favorite photos together.
-        We will add real pictures here.
-      </div>
-    `);
-  }
 
   
 else if (destination === "notes") {
