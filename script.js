@@ -306,6 +306,10 @@ function go(destination) {
     `);
   }
 
+  else if (destination === "music") {
+  renderBooBeats();
+}
+
   else if (destination === "settings") {
     render(`
       <button class="back" data-go="home">
@@ -617,6 +621,174 @@ function updateClock() {
 }
 
 setInterval(updateClock, 30000);
+
+
+/* ==========================================
+   BOO BEATS — SPOTIFY MUSIC LOUNGE
+   ========================================== */
+
+function getSpotifyPlaylistId(url) {
+  if (!url) return null;
+
+  try {
+    const parsed = new URL(url);
+
+    if (
+      parsed.hostname !== "open.spotify.com" &&
+      parsed.hostname !== "www.open.spotify.com"
+    ) {
+      return null;
+    }
+
+    const match = parsed.pathname.match(
+      /\/playlist\/([A-Za-z0-9]+)/
+    );
+
+    return match ? match[1] : null;
+  } catch {
+    return null;
+  }
+}
+
+function renderBooBeats(selectedId = null) {
+  cancelPlayback();
+  page = "music";
+
+  const playlists = booBeatsPlaylists;
+  const selected = playlists.find(p => p.id === selectedId);
+
+  render(`
+    <button class="back" data-go="home">
+      ‹ Home
+    </button>
+
+    <div class="boo-header">
+      <div class="tag">✦ SIS CONNECT · MUSIC ✦</div>
+      <h2>Boo Beats 🎧</h2>
+      <p class="mini">
+        Every Bunny Boo deserves her own soundtrack.
+      </p>
+    </div>
+
+    <div class="boo-featured">
+      <div class="boo-record">♫</div>
+      <div>
+        <small>PRETTY PRINCESS PRODUCTIONS</small>
+        <h3>Made for Sasha ♡</h3>
+        <p>Curated with love by Yasmin 💋</p>
+      </div>
+    </div>
+
+    <h3 class="boo-section-title">
+      ${selected ? "Now Playing ♫" : "Your Playlists ♡"}
+    </h3>
+
+    ${
+      selected
+        ? renderSpotifyPlayer(selected)
+        : `
+          <div class="boo-playlists">
+            ${playlists.map(p => `
+              <button
+                class="boo-playlist-card"
+                data-playlist="${escapeHTML(p.id)}"
+              >
+                <div
+                  class="boo-cover"
+                  style="background:${p.color}"
+                >
+                  ♫
+                </div>
+
+                <div class="boo-playlist-info">
+                  <strong>${escapeHTML(p.name)}</strong>
+                  <small>${escapeHTML(p.category)}</small>
+                  <p>${escapeHTML(p.description)}</p>
+                </div>
+
+                <span class="boo-chevron">›</span>
+              </button>
+            `).join("")}
+          </div>
+        `
+    }
+
+    ${
+      selected
+        ? `
+          <button class="pill boo-all" id="all-playlists">
+            ← All Playlists
+          </button>
+        `
+        : ""
+    }
+  `);
+
+  view.querySelectorAll("[data-playlist]").forEach(button => {
+    button.addEventListener("click", () => {
+      renderBooBeats(button.dataset.playlist);
+    });
+  });
+
+  document.querySelector("#all-playlists")?.addEventListener(
+    "click",
+    () => renderBooBeats()
+  );
+}
+
+function renderSpotifyPlayer(playlist) {
+  const playlistId = getSpotifyPlaylistId(playlist.spotifyUrl);
+
+  if (!playlistId) {
+    return `
+      <div class="boo-empty">
+        <div class="boo-record">♫</div>
+        <h3>${escapeHTML(playlist.name)}</h3>
+        <p>${escapeHTML(playlist.description)}</p>
+        <p class="mini">
+          This playlist is being curated by Yasmin. 💋
+        </p>
+      </div>
+    `;
+  }
+
+  const embedUrl =
+    "https://open.spotify.com/embed/playlist/" +
+    encodeURIComponent(playlistId) +
+    "?utm_source=generator";
+
+  const spotifyUrl =
+    "https://open.spotify.com/playlist/" +
+    encodeURIComponent(playlistId);
+
+  return `
+    <div class="boo-player">
+      <h3>${escapeHTML(playlist.name)}</h3>
+      <p>${escapeHTML(playlist.description)}</p>
+
+      <iframe
+        src="${embedUrl}"
+        title="${escapeHTML(playlist.name)} Spotify playlist"
+        width="100%"
+        height="352"
+        frameborder="0"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy"
+        style="border-radius:12px"
+      ></iframe>
+
+      <a
+        class="boo-spotify-link"
+        href="${spotifyUrl}"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Open in Spotify ↗
+      </a>
+    </div>
+  `;
+}
+
 
 // ==========================================
 // START PHONE
