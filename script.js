@@ -400,16 +400,11 @@ else if (destination === "notes") {
     }
 
 
-  else if (destination === "files") {
-    render(`
-      <button class="back" data-go="home">‹ Home</button>
-      <h2>Bunny Boo Files ✦</h2>
+  
+    else if (destination === "files") {
+    bunnyBooFiles.menu();
+    }
 
-      <div class="panel">
-        A little vault of surprises, just for Sasha.
-      </div>
-    `);
-  }
 
   
 
