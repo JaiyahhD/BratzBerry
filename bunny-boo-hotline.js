@@ -526,6 +526,7 @@ ILY FOR LIFEEEEE.
     { id: "favorites", label: "My Favorites ♡" }
   ];
 
+  
   let saved = loadSaved();
   let activeFilter = "all";
   let currentLetter = null;
@@ -547,7 +548,7 @@ ILY FOR LIFEEEEE.
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
     } catch {
-      // The app still works if storage is unavailable.
+      console.warn("Could not save Hotline progress.");
     }
   }
 
@@ -558,7 +559,7 @@ ILY FOR LIFEEEEE.
       ">": "&gt;",
       '"': "&quot;",
       "'": "&#39;"
-    }[char]));
+    })[char]);
   }
 
   function isOpened(id) {
@@ -589,7 +590,9 @@ ILY FOR LIFEEEEE.
     if (activeFilter === "favorites") {
       return letters.filter(letter => isFavorite(letter.id));
     }
+
     if (activeFilter === "all") return letters;
+
     return letters.filter(letter => letter.category === activeFilter);
   }
 
@@ -597,16 +600,87 @@ ILY FOR LIFEEEEE.
     return Boolean(view.querySelector(".bbh-app"));
   }
 
+  function cleanup() {
+    clearTimeout(openingTimer);
+    openingTimer = null;
+    currentLetter = null;
+  }
+
+  function goHome() {
+    cleanup();
+    go("home");
+  }
+
   function draw(html) {
     render(`<section class="bbh-app">${html}</section>`);
+
+    // Direct navigation listeners prevent conflicts with
+    // the main BRATZBERRY phone's click handling.
+    view.querySelectorAll("[data-bbh-action]").forEach(button => {
+      button.addEventListener("click", event => {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+
+        const action = button.dataset.bbhAction;
+
+        if (action === "home") {
+          goHome();
+        } else if (action === "menu") {
+          menu();
+        }
+      });
+    });
+
+    view.querySelectorAll("[data-bbh-filter]").forEach(button => {
+      button.addEventListener("click", event => {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+
+        activeFilter = button.dataset.bbhFilter;
+        menu();
+      });
+    });
+
+    view.querySelectorAll("[data-bbh-open]").forEach(button => {
+      button.addEventListener("click", event => {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+
+        const id = Number(button.dataset.bbhOpen);
+
+        if (id) openLetter(id);
+      });
+    });
+
+    view.querySelectorAll("[data-bbh-favorite]").forEach(button => {
+      button.addEventListener("click", event => {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+
+        const id = Number(button.dataset.bbhFavorite);
+
+        if (!id) return;
+
+        toggleFavorite(id);
+        showLetter(id);
+      });
+    });
   }
 
   function topBar(title, backAction = "menu") {
     return `
       <div class="bbh-topbar">
-        <button class="bbh-back" data-bbh-action="${backAction}"
-          aria-label="Back">←</button>
-        <div class="bbh-topbar-title">${escapeHTML(title)}</div>
+        <button
+          type="button"
+          class="bbh-back"
+          data-bbh-action="${backAction}"
+          aria-label="Back"
+        >←</button>
+
+        <div class="bbh-topbar-title">
+          ${escapeHTML(title)}
+        </div>
+
         <span class="bbh-topbar-heart">♡</span>
       </div>
     `;
@@ -614,62 +688,106 @@ ILY FOR LIFEEEEE.
 
   function menu() {
     clearTimeout(openingTimer);
+    openingTimer = null;
     currentLetter = null;
 
-    const openedCount = letters.filter(letter => isOpened(letter.id)).length;
+    const openedCount = letters.filter(
+      letter => isOpened(letter.id)
+    ).length;
+
     const visible = getVisibleLetters();
 
     draw(`
       ${topBar("Bunny Boo Hotline", "home")}
+
       <div class="bbh-hero">
         <div class="bbh-hero-icon">💌</div>
-        <div class="bbh-eyebrow">A LITTLE SOMETHING FROM YASMIN</div>
+
+        <div class="bbh-eyebrow">
+          A LITTLE SOMETHING FROM YASMIN
+        </div>
+
         <h1>Open When...</h1>
-        <p>For every mood, every moment, and every version of you.
-           Twenty little reminders that your girl is always rooting for you.</p>
+
+        <p>
+          For every mood, every moment, and every version of you.
+          Twenty little reminders that your girl is always
+          rooting for you.
+        </p>
+
         <div class="bbh-progress">
           <span>${openedCount} of 20 opened</span>
           <span>♡ ${saved.favorites.length} saved</span>
         </div>
+
         <div class="bbh-progress-track">
-          <div class="bbh-progress-fill"
-            style="width:${openedCount / letters.length * 100}%"></div>
+          <div
+            class="bbh-progress-fill"
+            style="width:${openedCount / letters.length * 100}%"
+          ></div>
         </div>
       </div>
 
       <div class="bbh-filter-row" aria-label="Filter letters">
         ${categories.map(category => `
           <button
-            class="bbh-filter ${activeFilter === category.id ? "is-active" : ""}"
-            data-bbh-filter="${category.id}">
+            type="button"
+            class="bbh-filter ${
+              activeFilter === category.id ? "is-active" : ""
+            }"
+            data-bbh-filter="${category.id}"
+          >
             ${category.label}
           </button>
         `).join("")}
       </div>
 
       <div class="bbh-section-label">
-        <span>${activeFilter === "all" ? "THE ENVELOPE COLLECTION" :
-          categories.find(c => c.id === activeFilter)?.label || "LETTERS"}</span>
-        <span>${visible.length} LETTER${visible.length === 1 ? "" : "S"}</span>
+        <span>
+          ${
+            activeFilter === "all"
+              ? "THE ENVELOPE COLLECTION"
+              : categories.find(
+                  category => category.id === activeFilter
+                )?.label || "LETTERS"
+          }
+        </span>
+
+        <span>
+          ${visible.length}
+          LETTER${visible.length === 1 ? "" : "S"}
+        </span>
       </div>
 
-      ${visible.length ? `
-        <div class="bbh-envelope-grid">
-          ${visible.map(letter => envelopeCard(letter)).join("")}
-        </div>
-      ` : `
-        <div class="bbh-empty">
-          <div>💗</div>
-          <h3>No favorites yet, Bunny Boo!</h3>
-          <p>Open an envelope and tap the heart to save it here.</p>
-          <button class="bbh-pill-button" data-bbh-filter="all">
-            See all envelopes
-          </button>
-        </div>
-      `}
+      ${
+        visible.length
+          ? `
+            <div class="bbh-envelope-grid">
+              ${visible.map(letter => envelopeCard(letter)).join("")}
+            </div>
+          `
+          : `
+            <div class="bbh-empty">
+              <div>💗</div>
+              <h3>No favorites yet, Bunny Boo!</h3>
+              <p>
+                Open an envelope and tap the heart
+                to save it here.
+              </p>
+
+              <button
+                type="button"
+                class="bbh-pill-button"
+                data-bbh-filter="all"
+              >
+                See all envelopes
+              </button>
+            </div>
+          `
+      }
 
       <div class="bbh-menu-footer">
-        Made with all my love, foolishness &amp; a little attitude.<br>
+        Made with all my love, foolishness &amp; a little attitude.
         <strong>— Your Pretty Princess 💋</strong>
       </div>
     `);
@@ -680,19 +798,27 @@ ILY FOR LIFEEEEE.
     const favorite = isFavorite(letter.id);
 
     return `
-      <button class="bbh-envelope-card ${opened ? "is-read" : ""}"
+      <button
+        type="button"
+        class="bbh-envelope-card ${opened ? "is-read" : ""}"
         data-bbh-open="${letter.id}"
-        aria-label="Open letter ${letter.id}: ${escapeHTML(letter.title)}">
+        aria-label="Open letter ${letter.id}: ${escapeHTML(letter.title)}"
+      >
         <div class="bbh-envelope-art">
           <div class="bbh-envelope-back"></div>
           <div class="bbh-envelope-flap"></div>
           <div class="bbh-envelope-front"></div>
           <div class="bbh-envelope-seal">♥</div>
         </div>
+
         <span class="bbh-envelope-number">
           LETTER ${String(letter.id).padStart(2, "0")}
         </span>
-        <span class="bbh-envelope-title">${escapeHTML(letter.title)}</span>
+
+        <span class="bbh-envelope-title">
+          ${escapeHTML(letter.title)}
+        </span>
+
         <span class="bbh-envelope-status">
           ${opened ? "✓ Opened" : "✉ Sealed"}
           ${favorite ? " · ♥ Saved" : ""}
@@ -710,8 +836,12 @@ ILY FOR LIFEEEEE.
 
     draw(`
       ${topBar("A Letter From Yasmin")}
+
       <div class="bbh-opening-screen">
-        <div class="bbh-opening-label">SPECIAL DELIVERY FOR SASHA</div>
+        <div class="bbh-opening-label">
+          SPECIAL DELIVERY FOR SASHA
+        </div>
+
         <div class="bbh-opening-envelope">
           <div class="bbh-opening-paper">♡</div>
           <div class="bbh-opening-back"></div>
@@ -719,13 +849,18 @@ ILY FOR LIFEEEEE.
           <div class="bbh-opening-front"></div>
           <div class="bbh-opening-seal">♥</div>
         </div>
-        <div class="bbh-opening-caption">Opening letter
-          ${String(id).padStart(2, "0")}...</div>
+
+        <div class="bbh-opening-caption">
+          Opening letter ${String(id).padStart(2, "0")}...
+        </div>
       </div>
     `);
 
     openingTimer = setTimeout(() => {
+      openingTimer = null;
+
       if (!isOpen() || currentLetter !== id) return;
+
       markOpened(id);
       showLetter(id);
     }, 1250);
@@ -746,89 +881,91 @@ ILY FOR LIFEEEEE.
       ${topBar("Letter " + String(id).padStart(2, "0"))}
 
       <div class="bbh-letter-header">
-        <span class="bbh-letter-emoji">${letter.emoji}</span>
-        <span class="bbh-letter-counter">LETTER ${id} OF 20</span>
+        <span class="bbh-letter-emoji">
+          ${letter.emoji}
+        </span>
+
+        <span class="bbh-letter-counter">
+          LETTER ${id} OF 20
+        </span>
+
         <h2>${escapeHTML(letter.title)}</h2>
+
         <p>From Yasmin, with love 💋</p>
       </div>
 
       <article class="bbh-paper">
         <div class="bbh-paper-decoration">♡</div>
-        <div class="bbh-paper-to">TO: MY BUNNY BOO</div>
+
+        <div class="bbh-paper-to">
+          TO: MY BUNNY BOO
+        </div>
+
         <div class="bbh-paper-divider"></div>
-        <div class="bbh-paper-body">${escapeHTML(letter.message)}</div>
-        <div class="bbh-paper-bottom">sealed with love ♡</div>
+
+        <div class="bbh-paper-body">
+${escapeHTML(letter.message)}
+        </div>
+
+        <div class="bbh-paper-bottom">
+          sealed with love ♡
+        </div>
       </article>
 
       <div class="bbh-letter-actions">
-        <button class="bbh-favorite-button ${favorite ? "is-favorite" : ""}"
+        <button
+          type="button"
+          class="bbh-favorite-button ${
+            favorite ? "is-favorite" : ""
+          }"
           data-bbh-favorite="${id}"
-          aria-pressed="${favorite}">
-          ${favorite ? "♥ Saved to Favorites" : "♡ Save This Letter"}
+          aria-pressed="${favorite}"
+        >
+          ${
+            favorite
+              ? "♥ Saved to Favorites"
+              : "♡ Save This Letter"
+          }
         </button>
-        <button class="bbh-replay-button" data-bbh-open="${id}">
+
+        <button
+          type="button"
+          class="bbh-replay-button"
+          data-bbh-open="${id}"
+        >
           ✉ Reopen Envelope
         </button>
       </div>
 
       <div class="bbh-letter-navigation">
-        <button data-bbh-open="${previous?.id || ""}"
-          ${previous ? "" : "disabled"}>
+        <button
+          type="button"
+          data-bbh-open="${previous?.id || ""}"
+          ${previous ? "" : "disabled"}
+        >
           ← Previous
         </button>
-        <button data-bbh-action="menu">All Envelopes</button>
-        <button data-bbh-open="${next?.id || ""}"
-          ${next ? "" : "disabled"}>
+
+        <button
+          type="button"
+          data-bbh-action="menu"
+        >
+          All Envelopes
+        </button>
+
+        <button
+          type="button"
+          data-bbh-open="${next?.id || ""}"
+          ${next ? "" : "disabled"}
+        >
           Next →
         </button>
       </div>
     `);
   }
 
-  function handleClick(event) {
-    if (!isOpen()) return;
-
-    const filter = event.target.closest("[data-bbh-filter]");
-    if (filter) {
-      activeFilter = filter.dataset.bbhFilter;
-      menu();
-      return;
-    }
-
-    const envelope = event.target.closest("[data-bbh-open]");
-    if (envelope) {
-      const id = Number(envelope.dataset.bbhOpen);
-      if (id) openLetter(id);
-      return;
-    }
-
-    const favorite = event.target.closest("[data-bbh-favorite]");
-    if (favorite) {
-      const id = Number(favorite.dataset.bbhFavorite);
-      toggleFavorite(id);
-      showLetter(id);
-      return;
-    }
-
-    const action = event.target.closest("[data-bbh-action]");
-    if (action) {
-      if (action.dataset.bbhAction === "home") {
-        clearTimeout(openingTimer);
-        currentLetter = null;
-        go("home");
-      } else if (action.dataset.bbhAction === "menu") {
-        menu();
-      }
-    }
-  }
-
-  view.addEventListener("click", handleClick);
-
   return {
     menu,
-    cleanup() {
-      clearTimeout(openingTimer);
-      currentLetter = null;
-    }
+    cleanup
   };
 })();

@@ -4412,3 +4412,24 @@
   }
 }
 
+
+/* BUNNY BOO HOTLINE — BACK BUTTON CLICK FIX */
+
+.bbh-app .bbh-topbar {
+  position: relative;
+  z-index: 100;
+  pointer-events: auto;
+}
+
+.bbh-app .bbh-back {
+  position: relative;
+  z-index: 101;
+  pointer-events: auto !important;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.bbh-app .bbh-back::before,
+.bbh-app .bbh-back::after {
+  pointer-events: none;
+}

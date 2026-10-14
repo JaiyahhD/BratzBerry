@@ -106,9 +106,10 @@ try {
 let currentPlaylistId = null;
 let dockExpanded = false;
 
-// ==========================================
-// HELPERS
-// ==========================================
+
+ // ==========================================
+ // HELPERS
+ // ==========================================
 
 function escapeHTML(value) {
   return String(value).replace(/[&<>"']/g, character => ({
@@ -138,14 +139,6 @@ function saveOpened() {
 
 function cancelPlayback() {
   playbackVersion++;
-
-if (
-  page === "messages" &&
-  destination !== "messages" &&
-  typeof bunnyBooHotline !== "undefined"
-) {
-  bunnyBooHotline.cleanup();
-}
 
   if (playbackTimer !== null) {
     clearTimeout(playbackTimer);
