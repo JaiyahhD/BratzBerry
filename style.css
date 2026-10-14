@@ -3,3 +3,139 @@
 
 /* Sasha / Bunny Boo luxe theme */
 :root{color:#f9e9df;background:#100b0c}.stage{background:radial-gradient(circle at 50% 20%,#6d3d2c,#100b0c 70%)}.phone{border-color:#a36b56;background:linear-gradient(125deg,#f4c49e,#593326 55%,#dba88b);box-shadow:0 28px 90px #000c,0 0 0 2px #efc19b inset}.screen{background:#170e0e}.status,.bottom{background:#180f0fe8;color:#f6d3b8}.island{background:#050404}.bottom span{background:#e6b69c}#view{background:linear-gradient(#180c0cb5,#130b0bc9),url('assets/sasha-wallpaper.webp') center center / cover no-repeat;color:#fbe8d6}.brand,.home-brand{color:#e6b37f;text-shadow:0 2px 1px #48261b,0 0 14px #ed9f6a99}.tag{color:#e8bb9e}.sub,.mini{color:#dfbca9}.action,.pill{background:linear-gradient(135deg,#b97d6c,#643b36);box-shadow:0 4px 0 #301b19}.bigtime{color:#f9d9c1}.home-art{min-height:100%;display:flex;flex-direction:column;gap:8px}.home-brand{font-family:'Playfair Display',serif;font-weight:800;font-size:29px;letter-spacing:-1px;text-align:center;margin-top:8px}.home-edition{text-align:center;font-family:'Playfair Display',serif;font-style:italic;color:#f8cfaf;font-size:16px}.home-spacer{min-height:65px;flex:1}.home-widget{align-self:end;max-width:72%;font:italic 17px/1.35 'Playfair Display',serif;text-align:center;color:#ffe0c9;text-shadow:1px 2px 6px #000;padding:12px;background:#180d0db5;border:1px solid #bd8169;border-radius:13px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px 6px;margin-top:16px}.app{color:#fbe2d1;text-shadow:0 2px 4px #000;font-size:10px;line-height:1.2;min-width:0}.appicon{width:66px;height:66px;object-fit:cover;border-radius:16px;background:#24110f;border:1px solid #b47c63;box-shadow:0 3px 11px #0009}.app span{max-width:100%;overflow-wrap:anywhere}.home-signoff{text-align:center;color:#e5b18d;font-size:11px;padding:14px 0 3px}.widget,.panel,.thread{background:#291916e8;border:1px solid #8c5a49;color:#ffe9d8}.thread strong{color:#ffe9d8}.thread small{color:#d1a58d}.avatar{background:#814b46}.bubble{background:#38221f;color:#ffe6d6}.bubble.from{background:#995e56;color:#fff2e6}button.back{color:#efb58f}.panel a{color:#ffd2a8}@media(max-width:480px){.stage{background:#130b0b}.home-spacer{min-height:40px}}
+
+
+/* ==========================================
+   BUNNY BOO HOTLINE — CHAT ANIMATIONS
+   ========================================== */
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(232, 176, 149, 0.25);
+}
+
+.chat-avatar {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #a86b72, #57342f);
+  font-size: 24px;
+}
+
+.chat-header strong {
+  display: block;
+  color: #ffe5d4;
+  font-size: 15px;
+}
+
+.chat-header small {
+  display: block;
+  color: #d3aa97;
+  font-size: 11px;
+  margin-top: 3px;
+}
+
+.chat-topic {
+  font-size: 13px;
+  color: #e8bca5;
+  text-align: center;
+  margin: 16px 0;
+}
+
+.chat-bubbles {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 180px;
+  max-height: 340px;
+  overflow-y: auto;
+  padding: 12px 4px;
+  scroll-behavior: smooth;
+}
+
+.chat-bubbles .bubble {
+  flex-shrink: 0;
+  width: fit-content;
+  max-width: 88%;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  animation: bubbleAppear 0.35s ease-out;
+}
+
+@keyframes bubbleAppear {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.typing {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: fit-content;
+  padding: 13px 16px;
+  border-radius: 18px 18px 18px 5px;
+  background: #684239;
+  flex-shrink: 0;
+}
+
+.typing span {
+  width: 7px;
+  height: 7px;
+  background: #f2c3b2;
+  border-radius: 50%;
+  animation: bunnyTyping 1.2s infinite ease-in-out;
+}
+
+.typing span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bunnyTyping {
+  0%, 60%, 100% {
+    opacity: 0.35;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-5px);
+  }
+}
+
+.chat-controls {
+  display: flex;
+  gap: 10px;
+  margin: 15px 0;
+  flex-wrap: wrap;
+}
+
+.chat-controls .pill {
+  cursor: pointer;
+}
+
+.chat-controls .pill:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .typing span,
+  .chat-bubbles .bubble {
+    animation: none;
+  }
+}
