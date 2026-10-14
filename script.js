@@ -245,7 +245,7 @@ function go(destination) {
             <button class="app" data-go="${id}">
               <img
                 class="appicon"
-                src="assets/${asset}.webp"
+                src="assets/${asset}.${asset === 'messages' || asset === 'sos' ? 'webp' : 'png'}"
                 alt=""
                 loading="lazy"
               >
