@@ -14,7 +14,6 @@
 
   <title>BRATZBERRY™ | Bunny Boo Edition</title>
 
-  <!-- Main Stylesheet -->
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -22,55 +21,74 @@
 
   <main class="stage">
 
-    <!-- BRATZBERRY Phone -->
     <div class="phone">
 
       <div class="screen">
 
         <!-- Phone Status Bar -->
         <div class="status">
-
           <span id="clock">9:41</span>
-
           <span class="island"></span>
-
           <span>▂▄▆ ♥</span>
-
         </div>
 
-        <!-- Dynamic App Content -->
+        <!-- App Screens -->
         <section
           id="view"
           aria-live="polite"
         ></section>
 
-        <!-- Phone Navigation -->
-        <nav class="bottom">
+        <!-- Persistent Spotify Player -->
+        <div
+          id="music-dock"
+          class="music-dock"
+          hidden
+        >
+          <div class="music-dock-header">
 
+            <span id="dock-title">
+              Boo Beats 🎧
+            </span>
+
+            <button
+              id="dock-toggle"
+              type="button"
+              aria-label="Expand or minimize Spotify player"
+              aria-expanded="false"
+            >
+              Expand ♫
+            </button>
+
+          </div>
+
+          <div id="dock-player"></div>
+
+        </div>
+
+        <!-- Phone Home Button -->
+        <nav class="bottom">
           <button
             id="home"
             aria-label="Go home"
           >
             <span></span>
           </button>
-
         </nav>
 
       </div>
 
     </div>
 
-    <!-- Phone Footer -->
     <p class="outside">
       BRATZBERRY™ · Bunny Boo Edition · made by Yasmin ♡
     </p>
 
   </main>
 
-  <!-- Spotify Playlist Data -->
+  <!-- Playlist Data -->
   <script src="playlists.js"></script>
 
-  <!-- Main Phone Functionality -->
+  <!-- Phone Functionality -->
   <script src="script.js"></script>
 
 </body>

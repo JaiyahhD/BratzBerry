@@ -1,10 +1,19 @@
 
+/* ==========================================
+   BRATZBERRY™ — BUNNY BOO EDITION
+   Made with love by Yasmin 💋
+   ========================================== */
+
 const view = document.querySelector("#view");
 const homeButton = document.querySelector("#home");
 
+const musicDock = document.querySelector("#music-dock");
+const dockTitle = document.querySelector("#dock-title");
+const dockToggle = document.querySelector("#dock-toggle");
+const dockPlayer = document.querySelector("#dock-player");
+
 // ==========================================
-// BRATZBERRY™ — BUNNY BOO EDITION
-// OPEN WHEN LETTERS
+// BUNNY BOO HOTLINE LETTERS
 // ==========================================
 
 const letters = [
@@ -76,6 +85,8 @@ const letters = [
 
 let page = "boot";
 let activeThread = 0;
+let playbackTimer = null;
+let playbackVersion = 0;
 
 let opened = new Set();
 
@@ -91,21 +102,23 @@ try {
   console.warn("Could not load saved messages.");
 }
 
-let playbackTimer = null;
-let playbackVersion = 0;
+// Spotify state
+let currentPlaylistId = null;
+let dockExpanded = false;
 
 // ==========================================
 // HELPERS
 // ==========================================
 
-const escapeHTML = (value) =>
-  String(value).replace(/[&<>"']/g, (character) => ({
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, character => ({
     "&": "&amp;",
     "<": "&lt;",
     ">": "&gt;",
     '"': "&quot;",
     "'": "&#39;"
   })[character]);
+}
 
 function render(html) {
   view.innerHTML = html;
@@ -119,7 +132,7 @@ function saveOpened() {
       JSON.stringify([...opened])
     );
   } catch (error) {
-    console.warn("Read status could not be saved.");
+    console.warn("Could not save message status.");
   }
 }
 
@@ -133,13 +146,18 @@ function cancelPlayback() {
 }
 
 // ==========================================
-// PHONE NAVIGATION
+// MAIN PHONE NAVIGATION
 // ==========================================
 
 function go(destination) {
   cancelPlayback();
-
   page = destination;
+
+  // Minimize the music controls when changing apps.
+  // IMPORTANT: The Spotify iframe is NOT removed.
+  if (destination !== "music") {
+    setDockExpanded(false);
+  }
 
   if (destination === "boot") {
     render(`
@@ -164,9 +182,7 @@ function go(destination) {
     render(`
       <div class="center">
         <div class="tag">SIS CONNECT ♥ FULL BARS</div>
-
         <div class="bigtime" id="locktime">9:41</div>
-
         <div class="sparkle">💌</div>
 
         <h2>Hey, Bunny Boo!</h2>
@@ -198,7 +214,6 @@ function go(destination) {
 
     render(`
       <div class="home-art">
-
         <div class="tag">
           ✦ SIS CONNECT · BUNNY BOO EDITION ✦
         </div>
@@ -233,7 +248,6 @@ function go(destination) {
         <div class="home-signoff">
           Made with love by Yasmin 💋
         </div>
-
       </div>
     `);
   }
@@ -252,7 +266,6 @@ function go(destination) {
 
       ${letters.map((letter, index) => `
         <button class="thread" data-thread="${index}">
-
           <span class="avatar">
             ${opened.has(index) ? "💗" : "💌"}
           </span>
@@ -267,7 +280,6 @@ function go(destination) {
               · ${opened.has(index) ? "Read" : "Unread"}
             </small>
           </span>
-
         </button>
       `).join("")}
     `);
@@ -277,12 +289,14 @@ function go(destination) {
     showThread(activeThread);
   }
 
+  else if (destination === "music") {
+    renderBooBeats();
+    return;
+  }
+
   else if (destination === "mail") {
     render(`
-      <button class="back" data-go="home">
-        ‹ Home
-      </button>
-
+      <button class="back" data-go="home">‹ Home</button>
       <h2>Baddie Mail 💌</h2>
 
       <div class="panel">
@@ -292,45 +306,33 @@ function go(destination) {
     `);
   }
 
-  else if (destination === "files") {
+  else if (destination === "memories") {
     render(`
-      <button class="back" data-go="home">
-        ‹ Home
-      </button>
-
-      <h2>Bunny Boo Files ✦</h2>
+      <button class="back" data-go="home">‹ Home</button>
+      <h2>Our Memories 📸</h2>
 
       <div class="panel">
-        A little vault of surprises, just for Sasha.
+        A home for your favorite photos together.
+        We will add real pictures here.
       </div>
     `);
   }
 
-  else if (destination === "music") {
-  renderBooBeats();
-}
-
-  else if (destination === "settings") {
+  else if (destination === "notes") {
     render(`
-      <button class="back" data-go="home">
-        ‹ Home
-      </button>
-
-      <h2>Settings ⚙</h2>
+      <button class="back" data-go="home">‹ Home</button>
+      <h2>Love Notes 📝</h2>
 
       <div class="panel">
-        BRATZBERRY™ · Bunny Boo Edition<br>
-        SIS CONNECT · Made by Yasmin ♡
+        Tiny affirmations, inside jokes, and sweet
+        reminders will live here.
       </div>
     `);
   }
 
   else if (destination === "sos") {
     render(`
-      <button class="back" data-go="home">
-        ‹ Home
-      </button>
-
+      <button class="back" data-go="home">‹ Home</button>
       <h2>Bestie SOS 🫶</h2>
 
       <div class="panel">
@@ -353,44 +355,45 @@ function go(destination) {
     `);
   }
 
-  else {
-    const pages = {
-      memories: [
-        "Our Memories 📸",
-        "A home for your favorite photos together. We will add real pictures here."
-      ],
-      music: [
-        "Boo Beats 🎵",
-        "Your Spotify playlist collection will live here. We will embed each playlist when you send its Spotify link."
-      ],
-      notes: [
-        "Love Notes 📝",
-        "Tiny affirmations, inside jokes, and sweet reminders will live here."
-      ],
-      about: [
-        "Sasha × Yasmin 💋",
-        "Two Bratz, one unbreakable sisterhood. This phone was made by Yasmin, just for her Bunny Boo."
-      ]
-    };
-
-    const data = pages[destination];
-
-    if (!data) {
-      go("home");
-      return;
-    }
-
+  else if (destination === "about") {
     render(`
-      <button class="back" data-go="home">
-        ‹ Home
-      </button>
-
-      <h2>${data[0]}</h2>
+      <button class="back" data-go="home">‹ Home</button>
+      <h2>Sasha × Yasmin 💋</h2>
 
       <div class="panel">
-        ${data[1]}
+        Two Bratz, one unbreakable sisterhood.
+        This phone was made by Yasmin,
+        just for her Bunny Boo.
       </div>
     `);
+  }
+
+  else if (destination === "files") {
+    render(`
+      <button class="back" data-go="home">‹ Home</button>
+      <h2>Bunny Boo Files ✦</h2>
+
+      <div class="panel">
+        A little vault of surprises, just for Sasha.
+      </div>
+    `);
+  }
+
+  else if (destination === "settings") {
+    render(`
+      <button class="back" data-go="home">‹ Home</button>
+      <h2>Settings ⚙</h2>
+
+      <div class="panel">
+        BRATZBERRY™ · Bunny Boo Edition<br>
+        SIS CONNECT · Made by Yasmin ♡
+      </div>
+    `);
+  }
+
+  else {
+    go("home");
+    return;
   }
 
   updateClock();
@@ -398,7 +401,6 @@ function go(destination) {
 
 // ==========================================
 // BUNNY BOO HOTLINE
-// ANIMATED TEXT CONVERSATIONS
 // ==========================================
 
 function showThread(index, replay = false) {
@@ -408,6 +410,8 @@ function showThread(index, replay = false) {
 
   activeThread = index;
   page = "thread";
+
+  setDockExpanded(false);
 
   const wasRead = opened.has(index);
 
@@ -422,14 +426,12 @@ function showThread(index, replay = false) {
     </button>
 
     <div class="chat-header">
-
       <span class="chat-avatar">💋</span>
 
       <span>
         <strong>Yasmin 💗</strong>
         <small>Pretty Princess · SIS CONNECT</small>
       </span>
-
     </div>
 
     <p class="chat-topic" id="chat-topic"></p>
@@ -442,7 +444,6 @@ function showThread(index, replay = false) {
     ></div>
 
     <div class="chat-controls">
-
       <button class="pill" id="replay">
         ↻ Replay
       </button>
@@ -450,7 +451,6 @@ function showThread(index, replay = false) {
       <button class="pill secondary" id="show-all">
         Show All
       </button>
-
     </div>
   `);
 
@@ -462,7 +462,6 @@ function showThread(index, replay = false) {
   const showAllButton = document.querySelector("#show-all");
 
   const token = playbackVersion;
-
   let messageIndex = 0;
 
   function scrollDown() {
@@ -476,7 +475,6 @@ function showThread(index, replay = false) {
     bubble.textContent = message;
 
     area.appendChild(bubble);
-
     scrollDown();
   }
 
@@ -486,10 +484,9 @@ function showThread(index, replay = false) {
 
   function showAll() {
     cancelPlayback();
-
     area.replaceChildren();
 
-    letter.lines.forEach((message) => {
+    letter.lines.forEach(message => {
       addBubble(message);
     });
 
@@ -503,14 +500,16 @@ function showThread(index, replay = false) {
 
   showAllButton.addEventListener("click", showAll);
 
-  // Previously opened letters show immediately.
   if (wasRead && !replay) {
     showAll();
     return;
   }
 
   function nextMessage() {
-    if (page !== "thread" || token !== playbackVersion) {
+    if (
+      page !== "thread" ||
+      token !== playbackVersion
+    ) {
       return;
     }
 
@@ -521,7 +520,6 @@ function showThread(index, replay = false) {
     }
 
     addBubble(letter.lines[messageIndex]);
-
     messageIndex++;
 
     if (messageIndex < letter.lines.length) {
@@ -532,7 +530,10 @@ function showThread(index, replay = false) {
   }
 
   function showTyping() {
-    if (page !== "thread" || token !== playbackVersion) {
+    if (
+      page !== "thread" ||
+      token !== playbackVersion
+    ) {
       return;
     }
 
@@ -553,13 +554,11 @@ function showThread(index, replay = false) {
     `;
 
     area.appendChild(indicator);
-
     scrollDown();
 
     const messageLength =
       letter.lines[messageIndex]?.length || 0;
 
-    // Longer texts take a little longer to arrive.
     const typingDelay = Math.min(
       2500,
       800 + messageLength * 12
@@ -571,15 +570,315 @@ function showThread(index, replay = false) {
     );
   }
 
-  // Begin with a typing indicator.
   showTyping();
 }
 
 // ==========================================
-// BUTTON NAVIGATION
+// BOO BEATS — PLAYLIST HELPERS
 // ==========================================
 
-view.addEventListener("click", (event) => {
+function getBooBeatsPlaylists() {
+  if (
+    typeof booBeatsPlaylists === "undefined" ||
+    !Array.isArray(booBeatsPlaylists)
+  ) {
+    return null;
+  }
+
+  return booBeatsPlaylists;
+}
+
+function getSpotifyPlaylistId(url) {
+  if (!url) return null;
+
+  try {
+    const parsed = new URL(url);
+
+    const validHosts = [
+      "open.spotify.com",
+      "www.open.spotify.com"
+    ];
+
+    if (!validHosts.includes(parsed.hostname)) {
+      return null;
+    }
+
+    const match = parsed.pathname.match(
+      /\/playlist\/([A-Za-z0-9]+)/
+    );
+
+    return match ? match[1] : null;
+  } catch (error) {
+    return null;
+  }
+}
+
+// ==========================================
+// PERSISTENT SPOTIFY MUSIC DOCK
+// ==========================================
+
+function setDockExpanded(expanded) {
+  dockExpanded = expanded;
+
+  musicDock.classList.toggle(
+    "expanded",
+    expanded
+  );
+
+  dockToggle.textContent = expanded
+    ? "Minimize −"
+    : "Expand ♫";
+
+  dockToggle.setAttribute(
+    "aria-expanded",
+    String(expanded)
+  );
+}
+
+function loadPersistentPlaylist(playlist) {
+  const playlistId = getSpotifyPlaylistId(
+    playlist.spotifyUrl
+  );
+
+  if (!playlistId) {
+    return false;
+  }
+
+  // Don't reload a playlist that's already mounted.
+  // This is what lets the audio continue!
+  if (currentPlaylistId === playlist.id) {
+    musicDock.hidden = false;
+    setDockExpanded(true);
+    return true;
+  }
+
+  const embedUrl =
+    "https://open.spotify.com/embed/playlist/" +
+    encodeURIComponent(playlistId) +
+    "?utm_source=generator";
+
+  // Replace the iframe ONLY when choosing
+  // a DIFFERENT playlist.
+  dockPlayer.innerHTML = `
+    <iframe
+      src="${embedUrl}"
+      title="${escapeHTML(playlist.name)} Spotify playlist"
+      width="100%"
+      height="352"
+      style="border:0; border-radius:12px;"
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      loading="lazy"
+    ></iframe>
+  `;
+
+  currentPlaylistId = playlist.id;
+
+  dockTitle.textContent = playlist.name;
+
+  musicDock.hidden = false;
+
+  document.querySelector(".screen")
+    .classList.add("has-music");
+
+  setDockExpanded(true);
+
+  return true;
+}
+
+// Expand/minimize WITHOUT deleting the iframe.
+dockToggle.addEventListener("click", () => {
+  setDockExpanded(!dockExpanded);
+});
+
+// ==========================================
+// BOO BEATS — PLAYLIST COLLECTION
+// ==========================================
+
+function renderBooBeats(selectedId = null) {
+  cancelPlayback();
+  page = "music";
+
+  const playlists = getBooBeatsPlaylists();
+
+  if (!playlists) {
+    render(`
+      <button class="back" data-go="home">
+        ‹ Home
+      </button>
+
+      <h2>Boo Beats 🎧</h2>
+
+      <div class="panel">
+        <strong>Oops! The playlists aren't loading.</strong>
+
+        <p>
+          Check that playlists.js is loaded
+          before script.js in index.html.
+        </p>
+      </div>
+    `);
+
+    return;
+  }
+
+  const selected = playlists.find(
+    playlist => playlist.id === selectedId
+  );
+
+  render(`
+    <button class="back" data-go="home">
+      ‹ Home
+    </button>
+
+    <div class="boo-header">
+      <div class="tag">
+        ✦ SIS CONNECT · MUSIC ✦
+      </div>
+
+      <h2>Boo Beats 🎧</h2>
+
+      <p class="mini">
+        Every Bunny Boo deserves her own soundtrack.
+      </p>
+    </div>
+
+    <div class="boo-featured">
+      <div class="boo-record">♫</div>
+
+      <div>
+        <small>PRETTY PRINCESS PRODUCTIONS</small>
+        <h3>Made for Sasha ♡</h3>
+        <p>Curated with love by Yasmin 💋</p>
+      </div>
+    </div>
+
+    <h3 class="boo-section-title">
+      ${selected ? "Selected Playlist ♫" : "Your Playlists ♡"}
+    </h3>
+
+    ${
+      selected
+        ? renderSelectedPlaylist(selected)
+        : `
+          <div class="boo-playlists">
+            ${playlists.map(playlist => `
+              <button
+                class="boo-playlist-card"
+                data-playlist="${escapeHTML(playlist.id)}"
+              >
+                <div
+                  class="boo-cover"
+                  style="background:${escapeHTML(playlist.color || "#84525D")}"
+                >
+                  ♫
+                </div>
+
+                <div class="boo-playlist-info">
+                  <strong>
+                    ${escapeHTML(playlist.name)}
+                  </strong>
+
+                  <small>
+                    ${escapeHTML(playlist.category)}
+                  </small>
+
+                  <p>
+                    ${escapeHTML(playlist.description)}
+                  </p>
+                </div>
+
+                <span class="boo-chevron">›</span>
+              </button>
+            `).join("")}
+          </div>
+        `
+    }
+
+    ${
+      selected
+        ? `
+          <button class="pill boo-all" id="all-playlists">
+            ← All Playlists
+          </button>
+        `
+        : ""
+    }
+  `);
+
+  view.querySelectorAll("[data-playlist]").forEach(
+    button => {
+      button.addEventListener("click", () => {
+        renderBooBeats(button.dataset.playlist);
+      });
+    }
+  );
+
+  document.querySelector("#all-playlists")
+    ?.addEventListener("click", () => {
+      setDockExpanded(false);
+      renderBooBeats();
+    });
+
+  updateClock();
+}
+
+// ==========================================
+// SELECTED SPOTIFY PLAYLIST
+// ==========================================
+
+function renderSelectedPlaylist(playlist) {
+  const playlistId = getSpotifyPlaylistId(
+    playlist.spotifyUrl
+  );
+
+  if (!playlistId) {
+    return `
+      <div class="boo-empty">
+        <h3>${escapeHTML(playlist.name)}</h3>
+        <p>${escapeHTML(playlist.description)}</p>
+        <p class="mini">
+          This playlist is being curated by Yasmin. 💋
+        </p>
+      </div>
+    `;
+  }
+
+  const spotifyUrl =
+    "https://open.spotify.com/playlist/" +
+    encodeURIComponent(playlistId);
+
+  // Mount the player outside #view.
+  loadPersistentPlaylist(playlist);
+
+  return `
+    <div class="boo-player">
+      <h3>${escapeHTML(playlist.name)}</h3>
+
+      <p>${escapeHTML(playlist.description)}</p>
+
+      <p class="mini">
+        Your Spotify player is open below. 🎧
+        Press play, then visit any other app.
+        The playlist will stay loaded.
+      </p>
+
+      <a
+        class="boo-spotify-link"
+        href="${spotifyUrl}"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Open in Spotify ↗
+      </a>
+    </div>
+  `;
+}
+
+// ==========================================
+// APP BUTTON NAVIGATION
+// ==========================================
+
+view.addEventListener("click", event => {
   const button = event.target.closest(
     "[data-go], [data-thread]"
   );
@@ -621,174 +920,6 @@ function updateClock() {
 }
 
 setInterval(updateClock, 30000);
-
-
-/* ==========================================
-   BOO BEATS — SPOTIFY MUSIC LOUNGE
-   ========================================== */
-
-function getSpotifyPlaylistId(url) {
-  if (!url) return null;
-
-  try {
-    const parsed = new URL(url);
-
-    if (
-      parsed.hostname !== "open.spotify.com" &&
-      parsed.hostname !== "www.open.spotify.com"
-    ) {
-      return null;
-    }
-
-    const match = parsed.pathname.match(
-      /\/playlist\/([A-Za-z0-9]+)/
-    );
-
-    return match ? match[1] : null;
-  } catch {
-    return null;
-  }
-}
-
-function renderBooBeats(selectedId = null) {
-  cancelPlayback();
-  page = "music";
-
-  const playlists = booBeatsPlaylists;
-  const selected = playlists.find(p => p.id === selectedId);
-
-  render(`
-    <button class="back" data-go="home">
-      ‹ Home
-    </button>
-
-    <div class="boo-header">
-      <div class="tag">✦ SIS CONNECT · MUSIC ✦</div>
-      <h2>Boo Beats 🎧</h2>
-      <p class="mini">
-        Every Bunny Boo deserves her own soundtrack.
-      </p>
-    </div>
-
-    <div class="boo-featured">
-      <div class="boo-record">♫</div>
-      <div>
-        <small>PRETTY PRINCESS PRODUCTIONS</small>
-        <h3>Made for Sasha ♡</h3>
-        <p>Curated with love by Yasmin 💋</p>
-      </div>
-    </div>
-
-    <h3 class="boo-section-title">
-      ${selected ? "Now Playing ♫" : "Your Playlists ♡"}
-    </h3>
-
-    ${
-      selected
-        ? renderSpotifyPlayer(selected)
-        : `
-          <div class="boo-playlists">
-            ${playlists.map(p => `
-              <button
-                class="boo-playlist-card"
-                data-playlist="${escapeHTML(p.id)}"
-              >
-                <div
-                  class="boo-cover"
-                  style="background:${p.color}"
-                >
-                  ♫
-                </div>
-
-                <div class="boo-playlist-info">
-                  <strong>${escapeHTML(p.name)}</strong>
-                  <small>${escapeHTML(p.category)}</small>
-                  <p>${escapeHTML(p.description)}</p>
-                </div>
-
-                <span class="boo-chevron">›</span>
-              </button>
-            `).join("")}
-          </div>
-        `
-    }
-
-    ${
-      selected
-        ? `
-          <button class="pill boo-all" id="all-playlists">
-            ← All Playlists
-          </button>
-        `
-        : ""
-    }
-  `);
-
-  view.querySelectorAll("[data-playlist]").forEach(button => {
-    button.addEventListener("click", () => {
-      renderBooBeats(button.dataset.playlist);
-    });
-  });
-
-  document.querySelector("#all-playlists")?.addEventListener(
-    "click",
-    () => renderBooBeats()
-  );
-}
-
-function renderSpotifyPlayer(playlist) {
-  const playlistId = getSpotifyPlaylistId(playlist.spotifyUrl);
-
-  if (!playlistId) {
-    return `
-      <div class="boo-empty">
-        <div class="boo-record">♫</div>
-        <h3>${escapeHTML(playlist.name)}</h3>
-        <p>${escapeHTML(playlist.description)}</p>
-        <p class="mini">
-          This playlist is being curated by Yasmin. 💋
-        </p>
-      </div>
-    `;
-  }
-
-  const embedUrl =
-    "https://open.spotify.com/embed/playlist/" +
-    encodeURIComponent(playlistId) +
-    "?utm_source=generator";
-
-  const spotifyUrl =
-    "https://open.spotify.com/playlist/" +
-    encodeURIComponent(playlistId);
-
-  return `
-    <div class="boo-player">
-      <h3>${escapeHTML(playlist.name)}</h3>
-      <p>${escapeHTML(playlist.description)}</p>
-
-      <iframe
-        src="${embedUrl}"
-        title="${escapeHTML(playlist.name)} Spotify playlist"
-        width="100%"
-        height="352"
-        frameborder="0"
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        loading="lazy"
-        style="border-radius:12px"
-      ></iframe>
-
-      <a
-        class="boo-spotify-link"
-        href="${spotifyUrl}"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Open in Spotify ↗
-      </a>
-    </div>
-  `;
-}
-
 
 // ==========================================
 // START PHONE
