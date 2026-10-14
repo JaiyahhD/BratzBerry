@@ -139,6 +139,14 @@ function saveOpened() {
 function cancelPlayback() {
   playbackVersion++;
 
+if (
+  page === "messages" &&
+  destination !== "messages" &&
+  typeof bunnyBooHotline !== "undefined"
+) {
+  bunnyBooHotline.cleanup();
+}
+
   if (playbackTimer !== null) {
     clearTimeout(playbackTimer);
     playbackTimer = null;
@@ -261,38 +269,13 @@ function go(destination) {
     `);
   }
 
-  else if (destination === "messages") {
-    render(`
-      <button class="back" data-go="home">
-        ‹ Home
-      </button>
+  
 
-      <h2>Bunny Boo Hotline 💌</h2>
+else if (destination === "messages") {
+  bunnyBooHotline.menu();
+}
 
-      <p class="mini">
-        Open whichever message your heart needs today.
-      </p>
 
-      ${letters.map((letter, index) => `
-        <button class="thread" data-thread="${index}">
-          <span class="avatar">
-            ${opened.has(index) ? "💗" : "💌"}
-          </span>
-
-          <span>
-            <strong>
-              Open when ${escapeHTML(letter.title)}…
-            </strong>
-
-            <small>
-              ${escapeHTML(letter.preview)}
-              · ${opened.has(index) ? "Read" : "Unread"}
-            </small>
-          </span>
-        </button>
-      `).join("")}
-    `);
-  }
 
   else if (destination === "thread") {
     showThread(activeThread);
