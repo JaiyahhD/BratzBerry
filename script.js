@@ -411,17 +411,12 @@ else if (destination === "notes") {
     `);
   }
 
-  else if (destination === "settings") {
-    render(`
-      <button class="back" data-go="home">‹ Home</button>
-      <h2>Settings ⚙</h2>
+  
 
-      <div class="panel">
-        BRATZBERRY™ · Bunny Boo Edition<br>
-        SIS CONNECT · Made by Yasmin ♡
-      </div>
-    `);
-  }
+else if (destination === "settings") {
+  bunnySettings.menu();
+}
+
 
   else {
     go("home");

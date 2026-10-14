@@ -1802,3 +1802,506 @@
     transition: none;
   }
 }
+
+
+/* ==========================================
+   BRATZBERRY™ SETTINGS + THEME ENGINE
+   ========================================== */
+
+:root,
+:root[data-bb-theme="original"] {
+  --bb-bg: #3d2530;
+  --bb-panel: #583645;
+  --bb-panel-soft: #74485b;
+  --bb-accent: #efb4cb;
+  --bb-text: #ffe6ee;
+  --bb-muted: #eac1cf;
+  --bb-border: #bb8199;
+  --bb-button: #d995b1;
+  --bb-button-text: #452632;
+  --bb-paper: #f4d9d9;
+  --bb-paper-text: #623849;
+}
+
+:root[data-bb-theme="pink"] {
+  --bb-bg: #793f5d;
+  --bb-panel: #9c5878;
+  --bb-panel-soft: #bd7899;
+  --bb-accent: #ffd4e5;
+  --bb-text: #fff0f5;
+  --bb-muted: #ffe0ec;
+  --bb-border: #f4b4cf;
+  --bb-button: #f7c3d9;
+  --bb-button-text: #71374f;
+  --bb-paper: #ffebf1;
+  --bb-paper-text: #753f56;
+}
+
+:root[data-bb-theme="sage"] {
+  --bb-bg: #344a3b;
+  --bb-panel: #526b57;
+  --bb-panel-soft: #708c73;
+  --bb-accent: #d9e5c9;
+  --bb-text: #f5f4e8;
+  --bb-muted: #e1e9d8;
+  --bb-border: #adc4a8;
+  --bb-button: #c5d5b6;
+  --bb-button-text: #334938;
+  --bb-paper: #f3f0df;
+  --bb-paper-text: #425744;
+}
+
+:root[data-bb-theme="gold"] {
+  --bb-bg: #4b3726;
+  --bb-panel: #6d5133;
+  --bb-panel-soft: #927047;
+  --bb-accent: #f4d995;
+  --bb-text: #fff3dc;
+  --bb-muted: #f3dfb9;
+  --bb-border: #d6b66d;
+  --bb-button: #e6c17c;
+  --bb-button-text: #4c3723;
+  --bb-paper: #f8ead0;
+  --bb-paper-text: #654c2e;
+}
+
+/* Theme the phone's UI without replacing its wallpaper. */
+
+:root[data-bb-theme="pink"] body,
+:root[data-bb-theme="sage"] body,
+:root[data-bb-theme="gold"] body {
+  background-color: var(--bb-bg);
+}
+
+:root[data-bb-theme="pink"] .phone,
+:root[data-bb-theme="sage"] .phone,
+:root[data-bb-theme="gold"] .phone {
+  border-color: var(--bb-border);
+}
+
+:root[data-bb-theme="pink"] .panel,
+:root[data-bb-theme="sage"] .panel,
+:root[data-bb-theme="gold"] .panel {
+  background: var(--bb-panel);
+  color: var(--bb-text);
+  border-color: var(--bb-border);
+}
+
+:root[data-bb-theme="pink"] .back,
+:root[data-bb-theme="sage"] .back,
+:root[data-bb-theme="gold"] .back {
+  color: var(--bb-text);
+  border-color: var(--bb-border);
+}
+
+:root[data-bb-theme="pink"] .status,
+:root[data-bb-theme="sage"] .status,
+:root[data-bb-theme="gold"] .status {
+  color: var(--bb-text);
+}
+
+/* Settings screen */
+
+.bbs-app {
+  padding: 10px 4px 90px;
+  color: var(--bb-text);
+}
+
+.bbs-app button {
+  cursor: pointer;
+}
+
+.bbs-heading {
+  text-align: center;
+  margin: 16px 0 22px;
+}
+
+.bbs-heading > span {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 1.3px;
+  font-weight: 800;
+  color: var(--bb-accent);
+}
+
+.bbs-heading h2 {
+  font-size: 26px;
+  margin: 9px 0;
+  color: var(--bb-text);
+}
+
+.bbs-heading p {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--bb-muted);
+}
+
+.bbs-owner {
+  text-align: center;
+  padding: 23px 12px;
+  background: linear-gradient(
+    145deg,
+    var(--bb-panel-soft),
+    var(--bb-panel)
+  );
+  border: 1px solid var(--bb-border);
+  border-radius: 17px;
+  margin-bottom: 21px;
+}
+
+.bbs-avatar {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 13px;
+  font-size: 35px;
+  background: var(--bb-bg);
+  border: 2px solid var(--bb-accent);
+}
+
+.bbs-owner h3 {
+  font-family: Georgia, serif;
+  font-size: 22px;
+  color: var(--bb-text);
+  margin: 7px 0;
+}
+
+.bbs-owner p {
+  font-size: 11px;
+  color: var(--bb-muted);
+}
+
+.bbs-status {
+  display: inline-block;
+  margin-top: 13px;
+  padding: 7px 12px;
+  border: 1px solid var(--bb-border);
+  border-radius: 30px;
+  color: var(--bb-accent);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.bbs-section-label {
+  font-size: 9px;
+  letter-spacing: 1.2px;
+  font-weight: 800;
+  color: var(--bb-accent);
+  margin: 17px 3px 10px;
+}
+
+.bbs-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bbs-menu button {
+  display: grid;
+  grid-template-columns: 33px minmax(0, 1fr) 12px;
+  align-items: center;
+  column-gap: 8px;
+  text-align: left;
+  padding: 13px 10px;
+  border-radius: 13px;
+  border: 1px solid var(--bb-border);
+  background: var(--bb-panel);
+  color: var(--bb-text);
+}
+
+.bbs-menu button > span {
+  font-size: 24px;
+  grid-row: span 2;
+}
+
+.bbs-menu strong {
+  font-size: 12px;
+}
+
+.bbs-menu small {
+  grid-column: 2;
+  color: var(--bb-muted);
+  font-size: 10px;
+  margin-top: 4px;
+}
+
+.bbs-menu b {
+  grid-column: 3;
+  grid-row: 1 / 3;
+  font-size: 19px;
+  color: var(--bb-accent);
+}
+
+.bbs-info {
+  padding: 7px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--bb-border);
+  background: var(--bb-panel);
+}
+
+.bbs-info > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 9px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--bb-border);
+  font-size: 11px;
+}
+
+.bbs-info > div:last-child {
+  border-bottom: 0;
+}
+
+.bbs-info span {
+  color: var(--bb-muted);
+}
+
+.bbs-info strong {
+  text-align: right;
+  color: var(--bb-text);
+}
+
+.bbs-footer,
+.bbs-tiny {
+  text-align: center;
+  font-size: 10px;
+  line-height: 1.7;
+  color: var(--bb-muted);
+  margin: 18px 0;
+}
+
+.bbs-paper {
+  padding: 20px 15px;
+  margin: 13px 0;
+  border-radius: 16px;
+  background: var(--bb-paper);
+  color: var(--bb-paper-text);
+  border: 1px solid var(--bb-border);
+  box-shadow: 0 7px 19px rgba(0,0,0,.15);
+}
+
+.bbs-paper h3 {
+  font-family: Georgia, serif;
+  font-size: 20px;
+  line-height: 1.35;
+  margin: 0 0 12px;
+}
+
+.bbs-paper p {
+  font-size: 12px;
+  line-height: 1.85;
+  margin: 12px 0;
+}
+
+.bbs-themes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bbs-theme-card {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 14px 11px;
+  border-radius: 15px;
+  text-align: left;
+  border: 2px solid transparent;
+  min-height: 99px;
+}
+
+.bbs-theme-card.bbs-selected {
+  border-color: #fff;
+  box-shadow: 0 0 0 2px var(--bb-accent);
+}
+
+.bbs-theme-icon {
+  font-size: 30px;
+}
+
+.bbs-theme-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.bbs-theme-details strong {
+  display: block;
+  font-size: 13px;
+}
+
+.bbs-theme-details small {
+  display: block;
+  font-size: 10px;
+  line-height: 1.5;
+  margin-top: 4px;
+}
+
+.bbs-theme-check {
+  font-size: 19px;
+  font-weight: 800;
+}
+
+.bbs-preview-original {
+  background: #4a2b39;
+  color: #ffe5ed;
+}
+
+.bbs-preview-pink {
+  background: #f2b7cf;
+  color: #713c55;
+}
+
+.bbs-preview-sage {
+  background: #b5c8ab;
+  color: #38503e;
+}
+
+.bbs-preview-gold {
+  background: #e1c07e;
+  color: #604627;
+}
+
+.bbs-swatches {
+  display: flex;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.bbs-swatches i {
+  width: 17px;
+  height: 17px;
+  border: 1px solid rgba(0,0,0,.15);
+  border-radius: 50%;
+}
+
+.bbs-preview-original i:nth-child(1) { background: #3d2530; }
+.bbs-preview-original i:nth-child(2) { background: #efb4cb; }
+.bbs-preview-original i:nth-child(3) { background: #f4d9d9; }
+
+.bbs-preview-pink i:nth-child(1) { background: #f3b6ce; }
+.bbs-preview-pink i:nth-child(2) { background: #a65377; }
+.bbs-preview-pink i:nth-child(3) { background: #fff0f5; }
+
+.bbs-preview-sage i:nth-child(1) { background: #a7b99c; }
+.bbs-preview-sage i:nth-child(2) { background: #526b57; }
+.bbs-preview-sage i:nth-child(3) { background: #f3f0df; }
+
+.bbs-preview-gold i:nth-child(1) { background: #d8b76e; }
+.bbs-preview-gold i:nth-child(2) { background: #6d5133; }
+.bbs-preview-gold i:nth-child(3) { background: #f8ead0; }
+
+.bbs-sound-setting {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 0;
+  border-top: 1px solid var(--bb-border);
+  border-bottom: 1px solid var(--bb-border);
+}
+
+.bbs-sound-setting strong,
+.bbs-sound-setting small {
+  display: block;
+}
+
+.bbs-sound-setting strong {
+  font-size: 12px;
+}
+
+.bbs-sound-setting small {
+  font-size: 10px;
+  margin-top: 5px;
+}
+
+.bbs-switch {
+  width: 50px;
+  height: 29px;
+  border: 0;
+  border-radius: 20px;
+  background: #a48e94;
+  padding: 3px;
+  flex-shrink: 0;
+}
+
+.bbs-switch span {
+  display: block;
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  background: white;
+  transition: transform .2s ease;
+}
+
+.bbs-switch-on {
+  background: #668b6c;
+}
+
+.bbs-switch-on span {
+  transform: translateX(21px);
+}
+
+.bbs-action {
+  display: block;
+  width: 100%;
+  margin-top: 17px;
+  padding: 13px;
+  border-radius: 25px;
+  border: 1px solid var(--bb-border);
+  background: var(--bb-button);
+  color: var(--bb-button-text);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.bbs-center {
+  text-align: center;
+}
+
+.bbs-big-emoji {
+  font-size: 42px;
+  margin-bottom: 15px;
+}
+
+.bbs-letter-label {
+  display: block;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin: 13px 0;
+}
+
+.bbs-about p {
+  margin: 16px 0;
+}
+
+.bbs-signature {
+  text-align: right;
+  font-family: Georgia, serif;
+  font-size: 18px;
+  font-style: italic;
+  margin-top: 20px;
+}
+
+.bbs-device-stamp {
+  text-align: center;
+  color: var(--bb-muted);
+  font-size: 9px;
+  letter-spacing: 1px;
+  line-height: 2;
+  margin: 20px 0;
+}
+
+.bbs-app button:focus-visible {
+  outline: 3px solid var(--bb-accent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bbs-switch span {
+    transition: none;
+  }
+}
