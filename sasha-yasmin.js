@@ -404,12 +404,55 @@ const sashaYasminApp = (() => {
       <div class="sy-paper sy-letter">
         <span class="sy-chapter">A LITTLE NOTE FOR MY GIRL ♡</span>
         <h3>Angel, GIRLLLL. 😭🤎</h3>
-        <p>Imagine joining a Discord server because you wanted to talk about books and ending up with a whole sister. Like be so serious right now. 😂</p>
-        <p>But that's exactly why I appreciate what we have. We didn't have to force it. Somewhere between TBB and just doing life, you became my girl.</p>
-        <p>I love that we can be two completely different people and still understand each other. I love that I don't have to explain every quiet moment or prove that I care by being available every second.</p>
-        <p>And I hope you know that no matter how busy life gets, I am always rooting for you. For your happiness, your peace, your goals, and everything you're working toward.</p>
-        <p>Now don't get too emotional because I still plan on getting on your nerves for the foreseeable future. 😭💋</p>
-        <p>Love you, Bunny Boo. I'm really glad I found TBB. But I'm even more glad I found YOU.</p>
+        
+<p>Angel, I don't think you truly understand how much your friendship means to me.🤎</p>
+
+<p>I've learned that genuine friendship isn't measured by how long you've known someone, how close you live to each other, or even how much life experience you share. Despite our age difference, you've shown me a level of maturity, understanding, and emotional intelligence that I admire more than you probably realize. You've reminded me that sometimes the people who teach us the most aren't necessarily the ones who've been here the longest.</p>
+
+<p>One of the things I love most about you is that you've never made me feel like my dreams were too big, too unrealistic, or too much. And GIRL, you know how I am. 😭 One minute I'm passionate about one thing, the next minute I've discovered another idea, another project, another possibility, or an entirely different direction I want to explore. Some of those dreams stick, some change, and some probably last all of three business days. But somehow, through every single one, you've been right there.</p>
+
+<p>You've never made me feel foolish for wanting more out of life. You've never made me feel like I needed to shrink my ambitions or explain why something mattered to me. Even when you could have told me no, even when my ideas probably sounded absolutely ridiculous, you've listened, encouraged me, and somehow found a way to make me believe I could actually pull them off. You've celebrated my excitement before there was even anything to celebrate.</p>
+
+<p>And that means more to me than I could ever put into words.</p>
+
+<p>Because the truth is, not everybody knows how to be happy for somebody else. Not everybody knows how to support another person's growth without making it about themselves. Not everybody is willing to stand beside someone through all their different seasons, changing plans, and endless ideas. But you do. So effortlessly that I sometimes wonder if you even realize how rare that is.</p>
+
+<p>You've shown me what it means to have a friend who genuinely wants to see me win. Not just when it's convenient. Not just when it's something you understand. Not just when the outcome is guaranteed. You cheer for me when I'm excited, encourage me when I'm unsure, and push me to keep reaching higher when I start questioning myself. You've believed in versions of me that I'm still working toward becoming.</p>
+
+<p>And I hope you know that I see you, too.</p>
+
+<p>I see the heart you put into everything you care about. I see how much you give to the people around you, how much you carry, and how hard you try even when things aren't easy. I see your strength, but I also see the person behind it. The girl who deserves to be supported, encouraged, protected, and celebrated just as much as she does for everybody else.</p>
+
+<p>And I never want you to feel like you have to be the strong one all the time with me. You don't have to have everything figured out. You don't have to be productive, cheerful, or okay every single day. You don't have to earn my friendship by doing anything for me. I love you for who you are, Angel. Not for what you can do, not for what you create, and not for how much you give.</p>
+
+<p>Just you.</p>
+
+<p>I think one of the most beautiful parts of our friendship is that we're the same AND different in so many ways, yet somehow we fit. We can have our own lives, our own responsibilities, our own struggles, and our own quiet moments without ever having to question where we stand. There's no competition, no keeping score, and no expectation that we have to talk every second to prove our love for each other. There's just this understanding that no matter what life looks like, we have each other.</p>
+
+<p>You've given me something I didn't even realize I needed: a friendship where I can be completely myself. The ambitious me. The overwhelmed me. The quiet me. The overly excited, starting-another-project-at-2-AM me. The me who has a thousand ideas and sometimes needs somebody to remind her that she's capable of bringing them to life. You've embraced every version without making me feel like any of them were too much.</p>
+
+<p>And I hope I give you that same kind of safety. I hope you always feel comfortable bringing me your happiness, your worries, your frustrations, your wildest dreams, and even the things you don't know how to put into words yet. I hope you never hesitate to lean on me the way you've allowed me to lean on you.</p>
+
+<p>Because I don't just want to be there for the exciting moments. I want to be there for the ordinary ones, the difficult ones, the unexpected ones, and the moments when you simply need someone in your corner.</p>
+
+<p>I want to see you accomplish every single thing your heart desires. I want to watch you grow into every version of yourself that you've dreamed of becoming. I want to celebrate your victories, remind you of your worth when you forget it, and be somebody you can always count on when life gets heavy.</p>
+
+<p>And years from now, when life looks completely different for both of us, I hope we're still doing exactly what we do now: laughing at the most ridiculous things, supporting each other's newest ideas, checking on each other, and reminding one another that we're never doing life completely alone.</p>
+
+<p>So thank you, Angel. Thank you for every idea you've entertained, every dream you've encouraged, every time you've cheered me on, and every moment you've made me feel seen. Thank you for being the kind of friend who doesn't just say she's supportive but actually shows it. Thank you for being patient with me, believing in me, and loving me through every version of myself.</p>
+
+<p>I don't ever want you to question how much you mean to me. You've become such an important part of my life, and I don't take that lightly. I know friendships like ours aren't something you come across every day, and I will never treat yours like something ordinary.</p>
+
+<p>You're not just my best friend. You're my sister. My Bunny Boo. My Sasha. One of the people I genuinely thank God for placing in my life.</p>
+
+<p>And no matter where life takes us, how much we grow, or how many ridiculous dreams I come up with next, I hope you always know that your Pretty Princess is going to be right there, cheering just as loudly for you as you've always cheered for me.</p>
+
+<p>You've signed up for a lifetime subscription, and unfortunately, there are no cancellations or refunds. 😭💋</p>
+
+<p>But seriously, Angel. I love you more than you'll probably ever know. And if there's one thing I hope this little phone reminds you of every time you open it, it's that you are deeply loved, endlessly appreciated, and never alone.</p>
+
+<p>Forever your Yasmin, your Pretty Princess, and your sister. 🤎</p>
+
         <div class="sy-letter-signature">Your Yasmin ♡</div>
       </div>
     `);
