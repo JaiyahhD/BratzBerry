@@ -4433,3 +4433,497 @@
 .bbh-app .bbh-back::after {
   pointer-events: none;
 }
+
+
+/* ==========================================
+   BRATZBERRY™ — BADDIE MAIL 💌
+   Chocolate • Blush • Rose Gold
+   ========================================== */
+
+.bm-app {
+  min-height: 100%;
+  padding: 0 0 85px;
+  color: #ffe9e5;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.bm-app button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.bm-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 18px;
+}
+
+.bm-back {
+  width: 39px;
+  height: 39px;
+  flex-shrink: 0;
+  border: 1px solid #b88a83;
+  border-radius: 13px;
+  background: #3e2529;
+  color: #ffe1e9;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.bm-topbar-title {
+  color: #ffe1e8;
+  font-size: 15px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.bm-topbar-icon {
+  width: 39px;
+  text-align: center;
+  font-size: 21px;
+}
+
+.bm-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 25px 18px;
+  border: 1px solid #c68c9c;
+  border-radius: 24px;
+  background: linear-gradient(
+    145deg,
+    #734250,
+    #3a222c 72%,
+    #291a22
+  );
+  box-shadow: 0 12px 30px #10070c66;
+  text-align: center;
+}
+
+.bm-hero::before {
+  content: "♡";
+  position: absolute;
+  top: -34px;
+  right: -8px;
+  color: #ffffff12;
+  font-size: 170px;
+  pointer-events: none;
+}
+
+.bm-hero-icon {
+  font-size: 52px;
+  margin-bottom: 12px;
+  animation: bmFloat 3s ease-in-out infinite;
+}
+
+@keyframes bmFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+
+.bm-eyebrow {
+  color: #ffc3d8;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.bm-hero h1 {
+  margin: 12px 0;
+  color: #ffe1ea;
+  font-family: 'Playfair Display', serif;
+  font-size: 34px;
+  line-height: 1.15;
+}
+
+.bm-hero p {
+  max-width: 280px;
+  margin: 12px auto 22px;
+  color: #f5cbd4;
+  font-size: 12px;
+  line-height: 1.75;
+}
+
+.bm-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.bm-stats div {
+  padding: 12px 5px;
+  border: 1px solid #ffffff35;
+  border-radius: 13px;
+  background: #ffffff12;
+}
+
+.bm-stats strong {
+  display: block;
+  color: #ffe6ed;
+  font-size: 21px;
+}
+
+.bm-stats span {
+  display: block;
+  margin-top: 3px;
+  color: #eec0cd;
+  font-size: 10px;
+}
+
+.bm-filters {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  margin: 18px -4px;
+  padding: 4px;
+  scrollbar-width: none;
+}
+
+.bm-filters::-webkit-scrollbar {
+  display: none;
+}
+
+.bm-filter {
+  flex-shrink: 0;
+  padding: 9px 12px;
+  border: 1px solid #9f7180;
+  border-radius: 22px;
+  background: #402934;
+  color: #fbd7e3;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.bm-filter.active {
+  border-color: #ffd3e1;
+  background: #e7a0ba;
+  color: #39212c;
+}
+
+.bm-section-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 21px 2px 13px;
+  color: #ffd7e3;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.bm-section-heading span:last-child {
+  color: #cda3b0;
+}
+
+.bm-inbox {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bm-mail-card {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: 100%;
+  min-width: 0;
+  padding: 13px 11px;
+  border: 1px solid #805762;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #432b33, #2b1c24);
+  color: #ffe7ed;
+  text-align: left;
+  transition: transform .2s, border-color .2s;
+}
+
+.bm-mail-card:active {
+  transform: scale(.98);
+}
+
+.bm-mail-card.is-unread {
+  border-color: #e6a4bc;
+  background: linear-gradient(135deg, #62404c, #37232d);
+}
+
+.bm-mail-card.is-featured {
+  border-color: #d4aa78;
+  background: linear-gradient(135deg, #674739, #382627);
+}
+
+.bm-mail-avatar {
+  display: grid;
+  place-items: center;
+  width: 45px;
+  height: 45px;
+  flex-shrink: 0;
+  border: 1px solid #b97e95;
+  border-radius: 14px;
+  background: #794b5d;
+  font-size: 23px;
+}
+
+.bm-mail-card.is-featured .bm-mail-avatar {
+  border-color: #e5bc8a;
+  background: #846044;
+}
+
+.bm-mail-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.bm-mail-from {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #ffe2e9;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.bm-unread-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #ffb5d3;
+  box-shadow: 0 0 7px #ffb5d3;
+}
+
+.bm-mail-subject {
+  overflow: hidden;
+  color: #f7d1dc;
+  font-size: 11px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bm-mail-preview {
+  overflow: hidden;
+  color: #cfaab5;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bm-mail-meta {
+  margin-top: 3px;
+  color: #e4adbf;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.bm-mail-arrow {
+  color: #e4b2c2;
+  font-size: 24px;
+}
+
+.bm-footer {
+  margin-top: 25px;
+  color: #e8bdca;
+  font-size: 11px;
+  line-height: 1.8;
+  text-align: center;
+}
+
+.bm-footer strong {
+  display: block;
+  color: #ffdbe6;
+}
+
+.bm-empty {
+  padding: 32px 16px;
+  border: 1px solid #936a7b;
+  border-radius: 20px;
+  background: #3c2630;
+  text-align: center;
+}
+
+.bm-empty > div {
+  font-size: 45px;
+}
+
+.bm-empty h3 {
+  color: #ffe1e9;
+  font-size: 16px;
+}
+
+.bm-empty p {
+  color: #e1b8c6;
+  font-size: 12px;
+}
+
+/* Individual love letter */
+
+.bm-letter-header {
+  margin: 15px 0 22px;
+  text-align: center;
+}
+
+.bm-letter-seal {
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  margin: 0 auto 16px;
+  border: 2px solid #f3c1d0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ad728a, #613d4b);
+  box-shadow: 0 0 28px #e49ab044;
+  font-size: 34px;
+}
+
+.bm-letter-counter {
+  color: #e7b2c3;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.bm-letter-header h2 {
+  margin: 12px 0;
+  color: #ffe2e9;
+  font-family: 'Playfair Display', serif;
+  font-size: 25px;
+  line-height: 1.3;
+}
+
+.bm-letter-header p {
+  color: #f0c0ce;
+  font-size: 12px;
+}
+
+.bm-featured-badge {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 7px 12px;
+  border: 1px solid #e6bb8a;
+  border-radius: 20px;
+  background: #684733;
+  color: #ffe2b7;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.bm-letter-paper {
+  position: relative;
+  overflow: hidden;
+  padding: 27px 20px;
+  border: 1px solid #edc5b6;
+  border-radius: 9px;
+  background: linear-gradient(
+    155deg,
+    #fff7ed,
+    #ffe9df 65%,
+    #f7d8d4
+  );
+  box-shadow: 0 12px 30px #0005;
+  color: #5a3440;
+}
+
+.bm-paper-heart {
+  position: absolute;
+  top: -20px;
+  right: -3px;
+  color: #c98d9b25;
+  font-size: 120px;
+  pointer-events: none;
+}
+
+.bm-paper-label {
+  position: relative;
+  color: #ad687d;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+}
+
+.bm-paper-line {
+  height: 1px;
+  margin: 17px 0;
+  background: #d6a5a8;
+}
+
+.bm-letter-message {
+  position: relative;
+  color: #583b42;
+  font-size: 13px;
+  line-height: 1.9;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.bm-letter-signature {
+  margin-top: 18px;
+  color: #9a6070;
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.bm-letter-signature strong {
+  color: #7c4356;
+  font-size: 17px;
+}
+
+.bm-save-button {
+  display: block;
+  width: 100%;
+  margin: 19px 0;
+  padding: 13px;
+  border: 1px solid #ffd0df;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #e9a5bd, #b87591);
+  color: #39232c;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.bm-save-button.saved {
+  background: #593a48;
+  color: #ffe1eb;
+}
+
+.bm-letter-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  margin-top: 20px;
+}
+
+.bm-letter-navigation button {
+  padding: 9px 10px;
+  border: 1px solid #a87a88;
+  border-radius: 18px;
+  background: #462e3a;
+  color: #ffe1eb;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.bm-letter-end {
+  margin: 27px 0;
+  color: #f5cbd6;
+  font-size: 12px;
+  font-style: italic;
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bm-hero-icon {
+    animation: none;
+  }
+
+  .bm-mail-card {
+    transition: none;
+  }
+}

@@ -279,17 +279,11 @@ else if (destination === "messages") {
     return;
   }
 
+  
   else if (destination === "mail") {
-    render(`
-      <button class="back" data-go="home">‹ Home</button>
-      <h2>Baddie Mail 💌</h2>
-
-      <div class="panel">
-        Letters from the TBB girlies will arrive here
-        once you collect and approve their messages. ♡
-      </div>
-    `);
+    baddieMail.menu();
   }
+
 
   
     else if (destination === "memories") {
