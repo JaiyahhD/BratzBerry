@@ -88,7 +88,7 @@ Today? We're filing a complaint with management.
 
 What did you eat today?
 
-And before you answer, coffee does not count. A handful of snacks does not count as dinner. And telling me you were "about to eat" three hours ago is NOT the same as eating.
+And before you answer, a handful of snacks does not count as dinner. Nor does a doggone drink. And telling me you were "about to eat" three hours ago is NOT the same as eating.
 
 I need a plate. An actual plate. With food on it.
 
@@ -134,7 +134,7 @@ Goodnight, Bunny Boo.
       title: "Open When You Forget THAT Girl Is You",
       category: "pep",
       from: "Yasmin",
-      message: `Sasha, I need you to remember something.
+      message: `Angel, I need you to remember something.
 
 You built a community where people found books, friendships, laughter, and a place to belong. That did not happen by accident.
 

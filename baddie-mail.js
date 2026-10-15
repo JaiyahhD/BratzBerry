@@ -532,7 +532,7 @@ The TBB Baddies 💋📚💗`
         <div class="bm-paper-heart">♡</div>
 
         <div class="bm-paper-label">
-          TO: ANGEL, OUR BUNNY BOO
+          TO: ANGEL
         </div>
 
         <div class="bm-paper-line"></div>
