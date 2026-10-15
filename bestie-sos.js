@@ -20,7 +20,7 @@ const bestieSOS = (() => {
     "Girl, are we having a crisis or do we need a snack and a nap? Be specific. 😭",
     "Your emotional support bestie has arrived. Unfortunately, she also has no idea what's going on. 😂",
     "This meeting could've been an email. This meltdown could've been a bubble bath.",
-    "Not you fighting for your life against a Tuesday. 😭",
+    "Not you fighting for your life against a day like today. 😭",
     "Bunny Boo, respectfully, close the 47 tabs in your brain.",
     "The universe said character development. We said CAN WE SKIP THIS EPISODE?! 😂"
   ];
@@ -386,10 +386,10 @@ const bestieSOS = (() => {
 
   function textYasmin() {
     // OPTIONAL: Add your phone number here later.
-    // Example: const number = "15551234567";
+    // Example: const number = "18329547664";
     // IMPORTANT: A number placed in a public website
     // can be viewed in the page's source code.
-    const number = "";
+    const number = "18329547664";
 
     const message =
       "Hey Pretty Princess! 💗 Your Bunny Boo needs you!";

@@ -87,7 +87,7 @@ const loveNotesApp = (() => {
     },
     {
       id: 16, category: "mirror", title: "Academic Baddie",
-      text: "Listen, Miss Future Psych Professional! Your brain is doing BIG things. You don't need to know everything today. That's literally why you're learning. Now give yourself some credit. 📚💋",
+      text: "Listen, Miss Future Big Time Professional! Your brain is doing BIG things. You don't need to know everything today. That's literally why you're learning. Now give yourself some credit. 📚💋",
       signature: "Your Pretty Princess ♡"
     },
     {
